@@ -40,7 +40,7 @@ uint8_t Temp_hal_u8Init (void){
  * that is in order to be executed whenever a UART Rx interrupt is fired.
  * */
 uint8_t Temp_hal_u8SetEngineTemp(void){
-	UART_u8ReceiveData(Temp_hal_su8EngineTemp);
+	UART_u8ReceiveData(&Temp_hal_su8EngineTemp);
 	return E_OK;
 }
 
