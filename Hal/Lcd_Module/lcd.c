@@ -5,11 +5,12 @@
  *      Author: bibom
  */
 
-
-#include "../Lib/Std_Types.h"
-#include "../Lib/Bit_Math.h"
-#include "error_status.h"
-#include "dio.h"
+#include "Std_Types.h"
+#include "Bit_Mask.h"
+#include "Bit_Math.h"
+#include "status.h"
+#include "Dio_int.h"
+#include "swTimer.h"
 #include "lcd.h"
 #include "lcd_cfg.h"
 
@@ -69,21 +70,22 @@ static u8 isReady = 0;
 
 static void init_stateMachine(void);
 static void process(void);
-static status_t lcd_sendPacket(u8 packet,u8 LCD_PACKET_type);
+static status_RT lcd_sendPacket(u8 packet,u8 LCD_PACKET_type);
+static void lcd_handler(void);
 
-status_t lcd_init(void)
+status_RT lcd_init(void)
 {
-	status_t status = E_OK;
+	status_RT status = E_OK;
 	for(u8 i=0;i<PIN_NUM;i++)
 	{
 		Dio_vidSetPinVal(lcdCfg[i],DIO_u8LOW);
 	}
-	swTimer_registerCbf(2,lcd_handler,swTimer_periodic);
+	SwTimer_register_cbf(2,SwTimerMode_periodic,lcd_handler);
 	return status;
 }
 
 
-void lcd_handler(void)
+static void lcd_handler(void)
 {
 	if(isReady)
 	{
@@ -97,7 +99,7 @@ void lcd_handler(void)
 
 static void init_stateMachine(void)
 {
-	status_t status;
+	status_RT status;
 	static u8 counter = 0;
 	switch(lcdStateMachine)
 	{
@@ -158,7 +160,7 @@ static void init_stateMachine(void)
 
 static void process(void)
 {
-	status_t status;
+	status_RT status;
 	if(lcdState == lcdState_writeData)
 	{
 		if(lcdBuffer[lcdBufferInd])
@@ -185,9 +187,9 @@ static void process(void)
 	}
 }
 
-static status_t lcd_sendPacket(u8 packet,u8 LCD_PACKET_type)
+static status_RT lcd_sendPacket(u8 packet,u8 LCD_PACKET_type)
 {
-	status_t status = E_OK;
+	status_RT status = E_OK;
 	static u8 state = 0;
 	if(state == 0)
 	{
@@ -265,12 +267,12 @@ static status_t lcd_sendPacket(u8 packet,u8 LCD_PACKET_type)
 			Dio_vidSetPinVal(lcdCfg[D0],DIO_u8LOW);
 		}
 		state = 1;
-		status = E_PENDING;
+		status = RT_PENDING;
 	}
 	else if(state == 1)
 	{
 		Dio_vidSetPinVal(lcdCfg[EN],DIO_u8LOW);
-		status = E_BUSY;
+		status = RT_BUSY;
 		state++;
 	}
 	else if(state==2)
@@ -282,9 +284,9 @@ static status_t lcd_sendPacket(u8 packet,u8 LCD_PACKET_type)
 	return status;
 }
 
-status_t lcd_clear(void)
+status_RT lcd_clear(void)
 {
-	status_t status = E_OK;
+	status_RT status = E_OK;
 	if(isReady)
 	{
 		if(lcdState == lcdState_idle)
@@ -294,7 +296,7 @@ status_t lcd_clear(void)
 		}
 		else
 		{
-			status = E_BUSY;
+			status = RT_BUSY;
 		}
 	}
 	else
@@ -304,9 +306,9 @@ status_t lcd_clear(void)
 	return status;
 }
 
-status_t lcd_writeString(const u8* const str)
+status_RT lcd_writeString(const u8* const str)
 {
-	status_t status = E_OK;
+	status_RT status = E_OK;
 	u8 i = 0;
 	if(isReady)
 	{
@@ -321,7 +323,7 @@ status_t lcd_writeString(const u8* const str)
 		}
 		else
 		{
-			status = E_BUSY;
+			status = RT_BUSY;
 		}
 	}
 	else

@@ -10,7 +10,7 @@
 #include "../Lib/Bit_Math.h"
 
 //replace this with right dio include
-#include "dio.h"
+#include "Dio_int.h"
 //-----------------------------------
 
 #include "lcd_cfg.h"
