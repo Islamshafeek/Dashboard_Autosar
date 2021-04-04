@@ -1,0 +1,624 @@
+Archive member included because of file (symbol)
+
+c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+                              ./Hal/KeyPad_Driver/keypad.o (__divmodhi4)
+c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                              c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o (exit)
+c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                              ./Hal/Lcd_Driver/lcd_cfg.o (__do_copy_data)
+c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                              ./Service/SwTimer.o (__do_clear_bss)
+c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                              c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o) (__udivmodhi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+Module_pfNotify     0x2               ./Mcal/Uart_Driver/UART.o
+Ignition_u8Status   0x1               ./App/Ignition_Module/ignition.o
+DOOR_u8arrDoorStatus
+                    0x2               ./App/Door_Module/door.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00020000         xr
+data             0x00800060         0x0000ffa0         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+LOAD ./Service/SwTimer.o
+LOAD ./Mcal/Uart_Driver/UART.o
+LOAD ./Mcal/Timer_Driver/Timer.o
+LOAD ./Mcal/Port_Driver/Port.o
+LOAD ./Mcal/Dio_Driver/Dio.o
+LOAD ./Hal/TempHal_Driver/Temp_hal.o
+LOAD ./Hal/Lcd_Driver/lcd.o
+LOAD ./Hal/Lcd_Driver/lcd_cfg.o
+LOAD ./Hal/KeyPad_Driver/keypad.o
+LOAD ./Hal/KeyPad_Driver/keypad_cfg.o
+LOAD ./App/SensorManager_Module/Sensor_Manager.o
+LOAD ./App/Ignition_Module/ignition.o
+LOAD ./App/Door_Module/door.o
+LOAD ./App/DashboardManager_Module/Dashboard_Manager.o
+LOAD c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+LOAD c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a
+LOAD c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x26fe
+ *(.vectors)
+ .vectors       0x00000000       0x54 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+                0x00000054                . = ALIGN (0x2)
+                0x00000054                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000054        0x0 linker stubs
+ *(.trampolines*)
+                0x00000054                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000054                __ctors_start = .
+ *(.ctors)
+                0x00000054                __ctors_end = .
+                0x00000054                __dtors_start = .
+ *(.dtors)
+                0x00000054                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000054        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+                0x00000054                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000054        0xc c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000060       0x16 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+                0x00000060                __do_copy_data
+ .init4         0x00000076       0x10 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x00000076                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x00000086        0x8 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ *(.init9)
+ *(.text)
+ .text          0x0000008e        0x4 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+                0x0000008e                __vector_1
+                0x0000008e                __vector_12
+                0x0000008e                __bad_interrupt
+                0x0000008e                __vector_6
+                0x0000008e                __vector_3
+                0x0000008e                __vector_17
+                0x0000008e                __vector_19
+                0x0000008e                __vector_7
+                0x0000008e                __vector_5
+                0x0000008e                __vector_4
+                0x0000008e                __vector_9
+                0x0000008e                __vector_2
+                0x0000008e                __vector_15
+                0x0000008e                __vector_8
+                0x0000008e                __vector_14
+                0x0000008e                __vector_16
+                0x0000008e                __vector_18
+                0x0000008e                __vector_20
+ .text          0x00000092        0x0 ./Service/SwTimer.o
+ .text          0x00000092        0x0 ./Mcal/Uart_Driver/UART.o
+ .text          0x00000092        0x0 ./Mcal/Timer_Driver/Timer.o
+ .text          0x00000092        0x0 ./Mcal/Port_Driver/Port.o
+ .text          0x00000092        0x0 ./Mcal/Dio_Driver/Dio.o
+ .text          0x00000092        0x0 ./Hal/TempHal_Driver/Temp_hal.o
+ .text          0x00000092        0x0 ./Hal/Lcd_Driver/lcd.o
+ .text          0x00000092        0x0 ./Hal/Lcd_Driver/lcd_cfg.o
+ .text          0x00000092        0x0 ./Hal/KeyPad_Driver/keypad.o
+ .text          0x00000092        0x0 ./Hal/KeyPad_Driver/keypad_cfg.o
+ .text          0x00000092        0x0 ./App/SensorManager_Module/Sensor_Manager.o
+ .text          0x00000092        0x0 ./App/Ignition_Module/ignition.o
+ .text          0x00000092        0x0 ./App/Door_Module/door.o
+ .text          0x00000092        0x0 ./App/DashboardManager_Module/Dashboard_Manager.o
+ .text          0x00000092        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .text          0x00000092        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x00000092        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text          0x00000092        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text          0x00000092        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x00000092                . = ALIGN (0x2)
+ *(.text.*)
+ .text.SwTimer_register_cbf
+                0x00000092       0xf0 ./Service/SwTimer.o
+                0x00000092                SwTimer_register_cbf
+ .text.SwTimer_Unregister
+                0x00000182       0xd6 ./Service/SwTimer.o
+ .text.Scheduler
+                0x00000258      0x142 ./Service/SwTimer.o
+ .text.SwTimer_init
+                0x0000039a       0x2a ./Service/SwTimer.o
+                0x0000039a                SwTimer_init
+ .text.UART_u8Init
+                0x000003c4       0x98 ./Mcal/Uart_Driver/UART.o
+                0x000003c4                UART_u8Init
+ .text.UART_u8ReceiveData
+                0x0000045c       0x26 ./Mcal/Uart_Driver/UART.o
+                0x0000045c                UART_u8ReceiveData
+ .text.__vector_13
+                0x00000482       0x5a ./Mcal/Uart_Driver/UART.o
+                0x00000482                __vector_13
+ .text.UART_vidSetCallBack
+                0x000004dc       0x26 ./Mcal/Uart_Driver/UART.o
+                0x000004dc                UART_vidSetCallBack
+ .text.TIMER_vidInit
+                0x00000502       0x2c ./Mcal/Timer_Driver/Timer.o
+                0x00000502                TIMER_vidInit
+ .text.TIMER_u8EnableNotification
+                0x0000052e       0x1e ./Mcal/Timer_Driver/Timer.o
+                0x0000052e                TIMER_u8EnableNotification
+ .text.TIMER_u8EnableCOMP_Int
+                0x0000054c       0x1e ./Mcal/Timer_Driver/Timer.o
+                0x0000054c                TIMER_u8EnableCOMP_Int
+ .text.TIMER_u8DisableNotification
+                0x0000056a       0x1e ./Mcal/Timer_Driver/Timer.o
+                0x0000056a                TIMER_u8DisableNotification
+ .text.TIMER_u8DisableCOMP_Int
+                0x00000588       0x1e ./Mcal/Timer_Driver/Timer.o
+                0x00000588                TIMER_u8DisableCOMP_Int
+ .text.TIMER_u8StartTimer
+                0x000005a6       0xcc ./Mcal/Timer_Driver/Timer.o
+                0x000005a6                TIMER_u8StartTimer
+ .text.TIMER_u8StopTimer
+                0x00000672       0x2a ./Mcal/Timer_Driver/Timer.o
+                0x00000672                TIMER_u8StopTimer
+ .text.TIMER_vidLoadTimer
+                0x0000069c       0x1e ./Mcal/Timer_Driver/Timer.o
+                0x0000069c                TIMER_vidLoadTimer
+ .text.TIMER_u8SetCallBack_OVF
+                0x000006ba       0x3a ./Mcal/Timer_Driver/Timer.o
+                0x000006ba                TIMER_u8SetCallBack_OVF
+ .text.TIMER_u8SetCallBack_COMP
+                0x000006f4       0x3a ./Mcal/Timer_Driver/Timer.o
+                0x000006f4                TIMER_u8SetCallBack_COMP
+ .text.__vector_11
+                0x0000072e       0x6c ./Mcal/Timer_Driver/Timer.o
+                0x0000072e                __vector_11
+ .text.__vector_10
+                0x0000079a       0x66 ./Mcal/Timer_Driver/Timer.o
+                0x0000079a                __vector_10
+ .text.Port_vidInit
+                0x00000800       0x4a ./Mcal/Port_Driver/Port.o
+                0x00000800                Port_vidInit
+ .text.Port_vidSetPinMode
+                0x0000084a      0x674 ./Mcal/Port_Driver/Port.o
+                0x0000084a                Port_vidSetPinMode
+ .text.Port_vidSetPinDir
+                0x00000ebe      0x1d6 ./Mcal/Port_Driver/Port.o
+                0x00000ebe                Port_vidSetPinDir
+ .text.Dio_vidSetPinVal
+                0x00001094      0x1d6 ./Mcal/Dio_Driver/Dio.o
+                0x00001094                Dio_vidSetPinVal
+ .text.Dio_u8GetPinVal
+                0x0000126a      0x102 ./Mcal/Dio_Driver/Dio.o
+                0x0000126a                Dio_u8GetPinVal
+ .text.Dio_u8TogglePin
+                0x0000136c      0x10c ./Mcal/Dio_Driver/Dio.o
+                0x0000136c                Dio_u8TogglePin
+ .text.Temp_hal_u8Init
+                0x00001478       0x14 ./Hal/TempHal_Driver/Temp_hal.o
+                0x00001478                Temp_hal_u8Init
+ .text.Temp_hal_u8SetEngineTemp
+                0x0000148c       0x18 ./Hal/TempHal_Driver/Temp_hal.o
+                0x0000148c                Temp_hal_u8SetEngineTemp
+ .text.Temp_hal_u8GetEngineTemp
+                0x000014a4       0x24 ./Hal/TempHal_Driver/Temp_hal.o
+                0x000014a4                Temp_hal_u8GetEngineTemp
+ .text.lcd_init
+                0x000014c8       0x4e ./Hal/Lcd_Driver/lcd.o
+                0x000014c8                lcd_init
+ .text.lcd_handler
+                0x00001516       0x20 ./Hal/Lcd_Driver/lcd.o
+ .text.init_stateMachine
+                0x00001536      0x10c ./Hal/Lcd_Driver/lcd.o
+ .text.process  0x00001642       0x80 ./Hal/Lcd_Driver/lcd.o
+ .text.lcd_sendPacket
+                0x000016c2      0x1c2 ./Hal/Lcd_Driver/lcd.o
+ .text.lcd_clear
+                0x00001884       0x40 ./Hal/Lcd_Driver/lcd.o
+                0x00001884                lcd_clear
+ .text.lcd_writeString
+                0x000018c4       0x96 ./Hal/Lcd_Driver/lcd.o
+                0x000018c4                lcd_writeString
+ .text.keypad_init
+                0x0000195a       0xec ./Hal/KeyPad_Driver/keypad.o
+                0x0000195a                keypad_init
+ .text.keypad_handler
+                0x00001a46      0x916 ./Hal/KeyPad_Driver/keypad.o
+ .text.keypad_getKey
+                0x0000235c       0x38 ./Hal/KeyPad_Driver/keypad.o
+                0x0000235c                keypad_getKey
+ .text.SensorManager_vidInit
+                0x00002394       0x2e ./App/SensorManager_Module/Sensor_Manager.o
+                0x00002394                SensorManager_vidInit
+ .text.SensorManager_vidGetSensorRead
+                0x000023c2       0x16 ./App/SensorManager_Module/Sensor_Manager.o
+ .text.SensorManager_vidGetTempRead
+                0x000023d8       0x16 ./App/SensorManager_Module/Sensor_Manager.o
+ .text.Ignition_u8GetIgntion
+                0x000023ee       0x38 ./App/Ignition_Module/ignition.o
+                0x000023ee                Ignition_u8GetIgntion
+ .text.Ignition_u8SetIgntion
+                0x00002426       0x26 ./App/Ignition_Module/ignition.o
+                0x00002426                Ignition_u8SetIgntion
+ .text.Door_u8SetDoorStatus
+                0x0000244c       0x42 ./App/Door_Module/door.o
+                0x0000244c                Door_u8SetDoorStatus
+ .text.Door_u8GetDoorStatus
+                0x0000248e       0x4c ./App/Door_Module/door.o
+                0x0000248e                Door_u8GetDoorStatus
+ .text.main     0x000024da      0x1d2 ./App/DashboardManager_Module/Dashboard_Manager.o
+                0x000024da                main
+ .text.libgcc   0x000026ac       0x26 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+                0x000026ac                __divmodhi4
+                0x000026ac                _div
+ .text.libgcc   0x000026d2        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000026d2        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000026d2        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000026d2       0x28 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x000026d2                __udivmodhi4
+                0x000026fa                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x000026fa        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x000026fa                exit
+                0x000026fa                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x000026fa        0x4 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ *(.fini0)
+                0x000026fe                _etext = .
+
+.data           0x00800060       0x3c load address 0x000026fe
+                0x00800060                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800060        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ .data          0x00800060        0x0 ./Service/SwTimer.o
+ .data          0x00800060        0x0 ./Mcal/Uart_Driver/UART.o
+ .data          0x00800060        0x0 ./Mcal/Timer_Driver/Timer.o
+ .data          0x00800060        0x0 ./Mcal/Port_Driver/Port.o
+ .data          0x00800060        0x0 ./Mcal/Dio_Driver/Dio.o
+ .data          0x00800060        0x0 ./Hal/TempHal_Driver/Temp_hal.o
+ .data          0x00800060        0x0 ./Hal/Lcd_Driver/lcd.o
+ .data          0x00800060        0x0 ./Hal/Lcd_Driver/lcd_cfg.o
+ .data          0x00800060        0x0 ./Hal/KeyPad_Driver/keypad.o
+ .data          0x00800060        0x0 ./Hal/KeyPad_Driver/keypad_cfg.o
+ .data          0x00800060        0x0 ./App/SensorManager_Module/Sensor_Manager.o
+ .data          0x00800060        0x0 ./App/Ignition_Module/ignition.o
+ .data          0x00800060        0x0 ./App/Door_Module/door.o
+ .data          0x00800060       0x19 ./App/DashboardManager_Module/Dashboard_Manager.o
+ .data          0x00800079        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .data          0x00800079        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .data          0x00800079        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .data          0x00800079        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .data          0x00800079        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ *(.data*)
+ .data.pressedKey
+                0x00800079        0x1 ./Hal/KeyPad_Driver/keypad.o
+ *(.rodata)
+ *(.rodata*)
+ .rodata.lcdCfg
+                0x0080007a        0xa ./Hal/Lcd_Driver/lcd_cfg.o
+                0x0080007a                lcdCfg
+ .rodata.keypadkeysCfg
+                0x00800084       0x10 ./Hal/KeyPad_Driver/keypad_cfg.o
+                0x00800084                keypadkeysCfg
+ .rodata.keypadCfg
+                0x00800094        0x8 ./Hal/KeyPad_Driver/keypad_cfg.o
+                0x00800094                keypadCfg
+ *(.gnu.linkonce.d*)
+                0x0080009c                . = ALIGN (0x2)
+                0x0080009c                _edata = .
+                0x0080009c                PROVIDE (__data_end, .)
+
+.bss            0x0080009c      0x323
+                0x0080009c                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x0080009c        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
+ .bss           0x0080009c        0x0 ./Service/SwTimer.o
+ .bss           0x0080009c        0x0 ./Mcal/Uart_Driver/UART.o
+ .bss           0x0080009c        0x0 ./Mcal/Timer_Driver/Timer.o
+ .bss           0x0080009c        0x0 ./Mcal/Port_Driver/Port.o
+ .bss           0x0080009c        0x0 ./Mcal/Dio_Driver/Dio.o
+ .bss           0x0080009c        0x0 ./Hal/TempHal_Driver/Temp_hal.o
+ .bss           0x0080009c        0x0 ./Hal/Lcd_Driver/lcd.o
+ .bss           0x0080009c        0x0 ./Hal/Lcd_Driver/lcd_cfg.o
+ .bss           0x0080009c        0x0 ./Hal/KeyPad_Driver/keypad.o
+ .bss           0x0080009c        0x0 ./Hal/KeyPad_Driver/keypad_cfg.o
+ .bss           0x0080009c        0x0 ./App/SensorManager_Module/Sensor_Manager.o
+ .bss           0x0080009c        0x0 ./App/Ignition_Module/ignition.o
+ .bss           0x0080009c        0x0 ./App/Door_Module/door.o
+ .bss           0x0080009c        0x0 ./App/DashboardManager_Module/Dashboard_Manager.o
+ .bss           0x0080009c        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+ .bss           0x0080009c        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .bss           0x0080009c        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .bss           0x0080009c        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x0080009c        0x0 c:/winavr_20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+ *(.bss*)
+ .bss.NextFree  0x0080009c        0x2 ./Service/SwTimer.o
+ .bss.cbfList   0x0080009e      0x2bc ./Service/SwTimer.o
+ .bss.Cbf_ptr_OVF
+                0x0080035a        0x2 ./Mcal/Timer_Driver/Timer.o
+                0x0080035a                Cbf_ptr_OVF
+ .bss.Cbf_ptr_COMP
+                0x0080035c        0x2 ./Mcal/Timer_Driver/Timer.o
+                0x0080035c                Cbf_ptr_COMP
+ .bss.Temp_hal_su8EngineTemp
+                0x0080035e        0x1 ./Hal/TempHal_Driver/Temp_hal.o
+ .bss.lcdStateMachine
+                0x0080035f        0x1 ./Hal/Lcd_Driver/lcd.o
+ .bss.lcdState  0x00800360        0x1 ./Hal/Lcd_Driver/lcd.o
+ .bss.lcdBufferInd
+                0x00800361        0x1 ./Hal/Lcd_Driver/lcd.o
+ .bss.isReady   0x00800362        0x1 ./Hal/Lcd_Driver/lcd.o
+ .bss.counter.1305
+                0x00800363        0x1 ./Hal/Lcd_Driver/lcd.o
+ .bss.state.1375
+                0x00800364        0x1 ./Hal/Lcd_Driver/lcd.o
+ .bss.lcdBuffer
+                0x00800365       0x21 ./Hal/Lcd_Driver/lcd.o
+ .bss.isReady   0x00800386        0x1 ./Hal/KeyPad_Driver/keypad.o
+ .bss.NO_KEY_count
+                0x00800387        0x1 ./Hal/KeyPad_Driver/keypad.o
+ .bss.keysDebounceCount
+                0x00800388       0x30 ./Hal/KeyPad_Driver/keypad.o
+ .bss.KeyPad_Read
+                0x008003b8        0x1 ./App/SensorManager_Module/Sensor_Manager.o
+ .bss.Temp_Read
+                0x008003b9        0x1 ./App/SensorManager_Module/Sensor_Manager.o
+ *(COMMON)
+ COMMON         0x008003ba        0x2 ./Mcal/Uart_Driver/UART.o
+                0x008003ba                Module_pfNotify
+ COMMON         0x008003bc        0x1 ./App/Ignition_Module/ignition.o
+                0x008003bc                Ignition_u8Status
+ COMMON         0x008003bd        0x2 ./App/Door_Module/door.o
+                0x008003bd                DOOR_u8arrDoorStatus
+                0x008003bf                PROVIDE (__bss_end, .)
+                0x000026fe                __data_load_start = LOADADDR (.data)
+                0x0000273a                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x008003bf        0x0
+                0x008003bf                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x008003bf                PROVIDE (__noinit_end, .)
+                0x008003bf                _end = .
+                0x008003bf                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab           0x00000000     0x441c
+ *(.stab)
+ .stab          0x00000000      0x4e0 ./Service/SwTimer.o
+ .stab          0x000004e0      0x654 ./Mcal/Uart_Driver/UART.o
+                                0x660 (size before relaxing)
+ .stab          0x00000b34      0x6f0 ./Mcal/Timer_Driver/Timer.o
+                                0x8b8 (size before relaxing)
+ .stab          0x00001224      0x618 ./Mcal/Port_Driver/Port.o
+                                0x624 (size before relaxing)
+ .stab          0x0000183c      0x4d4 ./Mcal/Dio_Driver/Dio.o
+                                0x4e0 (size before relaxing)
+ .stab          0x00001d10      0x324 ./Hal/TempHal_Driver/Temp_hal.o
+                                0x330 (size before relaxing)
+ .stab          0x00002034      0xa14 ./Hal/Lcd_Driver/lcd.o
+                                0xa20 (size before relaxing)
+ .stab          0x00002a48       0xfc ./Hal/Lcd_Driver/lcd_cfg.o
+                                0x228 (size before relaxing)
+ .stab          0x00002b44      0x840 ./Hal/KeyPad_Driver/keypad.o
+                                0x84c (size before relaxing)
+ .stab          0x00003384      0x12c ./Hal/KeyPad_Driver/keypad_cfg.o
+                                0x2c4 (size before relaxing)
+ .stab          0x000034b0      0x354 ./App/SensorManager_Module/Sensor_Manager.o
+                                0x360 (size before relaxing)
+ .stab          0x00003804      0x36c ./App/Ignition_Module/ignition.o
+                                0x528 (size before relaxing)
+ .stab          0x00003b70      0x354 ./App/Door_Module/door.o
+                                0x360 (size before relaxing)
+ .stab          0x00003ec4      0x558 ./App/DashboardManager_Module/Dashboard_Manager.o
+                                0x564 (size before relaxing)
+
+.stabstr        0x00000000     0x25ab
+ *(.stabstr)
+ .stabstr       0x00000000     0x25ab ./Service/SwTimer.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(Dashboard_v1.elf elf32-avr)
+LOAD linker stubs
