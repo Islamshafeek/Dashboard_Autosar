@@ -12,6 +12,7 @@
 #include "Dio_int.h"
 #include "keypad.h"
 #include "keypad_cfg.h"
+#include "Lcd.h"
 
 static u8 isReady = 0;
 static u8 pressedKey = LCD_NO_KEY;
@@ -31,6 +32,8 @@ typedef struct{
 
 static debounce_t keysDebounceCount[4][4];
 static void keypad_handler(void);
+static u8 NO_KEY_count = 0;
+
 
 status_RT keypad_init(void)
 {
@@ -39,6 +42,10 @@ status_RT keypad_init(void)
 	for(u8 i=0;i<4;i++)
 	{
 		Dio_vidSetPinVal(keypadCfg[i],DIO_u8HIGH);
+		keysDebounceCount[i][0].prev = keyState_notPressed;
+		keysDebounceCount[i][1].prev = keyState_notPressed;
+		keysDebounceCount[i][2].prev = keyState_notPressed;
+		keysDebounceCount[i][3].prev = keyState_notPressed;
 	}
 	if(status == RT_SUCCESS)
 	{
@@ -57,18 +64,24 @@ static void keypad_handler(void)
 	if(isReady)
 	{
 		u8 colsVal = 0;
-		for(u8 ind=0;ind<4;ind++)
+		u8 ind;
+		for(ind=0;ind<4;ind++)
 		{
 			colsVal = 0;
+			Dio_vidSetPinVal(keypadCfg[0],DIO_u8HIGH);
+			Dio_vidSetPinVal(keypadCfg[1],DIO_u8HIGH);
+			Dio_vidSetPinVal(keypadCfg[2],DIO_u8HIGH);
+			Dio_vidSetPinVal(keypadCfg[3],DIO_u8HIGH);
+
 			Dio_vidSetPinVal(keypadCfg[(ind+0)%4],DIO_u8LOW);
 			Dio_vidSetPinVal(keypadCfg[(ind+1)%4],DIO_u8HIGH);
 			Dio_vidSetPinVal(keypadCfg[(ind+2)%4],DIO_u8HIGH);
 			Dio_vidSetPinVal(keypadCfg[(ind+3)%4],DIO_u8HIGH);
 
-			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_1]) << 0;
-			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_2]) << 1;
-			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_3]) << 2;
-			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_4]) << 3;
+			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_1 + 4]) << 0;
+			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_2 + 4]) << 1;
+			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_3 + 4]) << 2;
+			colsVal |= Dio_u8GetPinVal(keypadCfg[COL_4 + 4]) << 3;
 
 			if(colsVal != 0x0F)
 			{
@@ -158,6 +171,19 @@ static void keypad_handler(void)
 				break;
 			}
 		}
+		if(ind == 4)
+		{
+			NO_KEY_count++;
+			if(NO_KEY_count == 5)
+			{
+				NO_KEY_count = 0;
+				pressedKey = LCD_NO_KEY;
+			}
+		}
+		Dio_vidSetPinVal(keypadCfg[0],DIO_u8HIGH);
+					Dio_vidSetPinVal(keypadCfg[1],DIO_u8HIGH);
+					Dio_vidSetPinVal(keypadCfg[2],DIO_u8HIGH);
+					Dio_vidSetPinVal(keypadCfg[3],DIO_u8HIGH);
 	}
 }
 

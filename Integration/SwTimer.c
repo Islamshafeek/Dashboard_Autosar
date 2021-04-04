@@ -9,6 +9,7 @@
 #include "Bit_Math.h"
 #include "SwTimer.h"
 #include "Timer_int.h"
+#include "Dio_int.h"
 
 static u32 NextFree;
 static cbfList_t cbfList[CBF_MAX];

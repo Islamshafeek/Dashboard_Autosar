@@ -75,7 +75,7 @@ static void lcd_handler(void);
 
 status_RT lcd_init(void)
 {
-	status_RT status = E_OK;
+	status_RT status = RT_PENDING;
 	for(u8 i=0;i<PIN_NUM;i++)
 	{
 		Dio_vidSetPinVal(lcdCfg[i],DIO_u8LOW);
@@ -286,7 +286,7 @@ static status_RT lcd_sendPacket(u8 packet,u8 LCD_PACKET_type)
 
 status_RT lcd_clear(void)
 {
-	status_RT status = E_OK;
+	status_RT status = RT_PENDING;
 	if(isReady)
 	{
 		if(lcdState == lcdState_idle)
@@ -301,14 +301,14 @@ status_RT lcd_clear(void)
 	}
 	else
 	{
-		status = E_NOK;
+		status = RT_ERROR;
 	}
 	return status;
 }
 
 status_RT lcd_writeString(const u8* const str)
 {
-	status_RT status = E_OK;
+	status_RT status = RT_PENDING;
 	u8 i = 0;
 	if(isReady)
 	{
@@ -328,7 +328,7 @@ status_RT lcd_writeString(const u8* const str)
 	}
 	else
 	{
-		status = E_NOK;
+		status = RT_ERROR;
 	}
 	return status;
 }

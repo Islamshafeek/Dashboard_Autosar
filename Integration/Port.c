@@ -548,7 +548,6 @@ void Port_vidInit(void)
 #elif 	 PORT_u8PIN_12_INIT_MODE == PORT_u8INPUT_PULL_UP
 	#undef 	PORT_u8PIN_12_DEF_VAL
 	#define PORT_u8PIN_12_DEF_VAL	PORT_u8HIGH
-PUT
 	#undef	PORT_u8PIN_12_DEF_DIR
 	#define PORT_u8PIN_12_DEF_DIR	PORT_u8INPUT
 	// Set the default Direction and Value.

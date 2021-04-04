@@ -39,12 +39,12 @@ const u8 keypadkeysCfg[4][4] = {
 };
 
 const u8 keypadCfg[8] = {
-		[ROW_1] = DIO_u8PIN_0,
-		[ROW_2] = DIO_u8PIN_1,
-		[ROW_3] = DIO_u8PIN_2,
-		[ROW_4] = DIO_u8PIN_3,
-		[COL_1] = DIO_u8PIN_4,
-		[COL_2] = DIO_u8PIN_5,
-		[COL_3] = DIO_u8PIN_6,
-		[COL_4] = DIO_u8PIN_7
+		DIO_u8PIN_8,
+		DIO_u8PIN_9,
+		DIO_u8PIN_10,
+		DIO_u8PIN_11,
+		DIO_u8PIN_12,
+		DIO_u8PIN_13,
+		DIO_u8PIN_14,
+		DIO_u8PIN_15
 };
