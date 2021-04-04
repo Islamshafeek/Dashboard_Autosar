@@ -17,14 +17,14 @@
 
 /*Lcd pins configuration, please configure each element with the correct dio pin no.*/
 const u8 lcdCfg[PIN_NUM] = {
-		[RS] = DIO_u8PIN_0,
-		[EN] = DIO_u8PIN_1,
-		[D7] = DIO_u8PIN_2,
-		[D6] = DIO_u8PIN_3,
-		[D5] = DIO_u8PIN_4,
-		[D4] = DIO_u8PIN_5,
-		[D3] = DIO_u8PIN_6,
-		[D2] = DIO_u8PIN_7,
-		[D1] = DIO_u8PIN_8,
-		[D0] = DIO_u8PIN_9
+		[RS] = DIO_u8PIN_16,
+		[EN] = DIO_u8PIN_17,
+		[D7] = DIO_u8PIN_31,
+		[D6] = DIO_u8PIN_30,
+		[D5] = DIO_u8PIN_29,
+		[D4] = DIO_u8PIN_28,
+		[D3] = DIO_u8PIN_27,
+		[D2] = DIO_u8PIN_26,
+		[D1] = DIO_u8PIN_25,
+		[D0] = DIO_u8PIN_24
 };

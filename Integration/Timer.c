@@ -21,6 +21,7 @@
 #include "Status.h"
 #include "Timer_int.h"
 #include "Timer_cfg.h"
+#include "Dio_int.h"
 
 void ( * Cbf_ptr_OVF)  (void) = {NULL}; //initialize the pointers to Null
 void ( * Cbf_ptr_COMP) (void) = {NULL}; //initialize the pointers to Null
@@ -170,6 +171,7 @@ ISR(TIMER0_OVF_vect)
 	if( Cbf_ptr_OVF != NULL)
 	{
 		/* Calling the function */
+		TIMER_vidLoadTimer(248);
 		Cbf_ptr_OVF();
 	}
 	else
