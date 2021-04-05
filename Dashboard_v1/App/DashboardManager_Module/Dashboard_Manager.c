@@ -26,7 +26,7 @@ static void DashboardManager_vidLcdDisplay(void);
 static void DashboardManager_vidDisplaySpeed(void);
 static void DashboardManager_vidDisplayTemp(void);
 static void DashboardManager_vidDisplayDoor(void);
-static void DashboardManager_vidDisplayIgnition(void);
+//static void DashboardManager_vidDisplayIgnition(void);
 static void itoa (u8 Copy_u8Value,u8 *Copy_pu8Arr);
 
 static u8 str[10] ;
@@ -34,9 +34,9 @@ static u8 str[10] ;
 int main(void)
 {
 	u8 key;
+	_SREG.Bits.Bit7 = 1;
 	Port_vidInit();
 	SwTimer_init();
-	_SREG.Bits.Bit7 = 1;
 	lcd_init();
 	keypad_init();
 	Temp_hal_u8Init();
@@ -138,10 +138,10 @@ static void DashboardManager_vidLcdDisplay(void){
 	static u8 IgnitionState = 0 ;
 
 	Ignition_u8GetIgntion(&IgnitionState);
-	if (IgnitionState == 1 ){
+	if (IgnitionState == IGNITION_u8ON ){
 		DashboardManager_vidDisplaySpeed();
-		DashboardManager_vidDisplayTemp();
 		DashboardManager_vidDisplayDoor();
+		DashboardManager_vidDisplayTemp();
 	}
 	else{
 
@@ -156,22 +156,39 @@ static void DashboardManager_vidDisplaySpeed(void){
 	while(lcd_clear()!=RT_PENDING);
 	while(lcd_writeString((const u8*)"S ") != RT_PENDING);
 	itoa (Speed,&str);
+	if (Speed < 100){
+		while(lcd_writeString((const u8*)"0") != RT_PENDING);
+	}
+	else if (Speed < 10){
+		while(lcd_writeString((const u8*)"00") != RT_PENDING);
+	}
 	while(lcd_writeString((const u8*)&str) != RT_PENDING);
+
 	if (Speed > 150){
-
-		while(Lcd_WriteChar(0x85 ,lcdState_writeCommand) != RT_PENDING);
 		while(lcd_writeString((const u8*)"H") != RT_PENDING);
-
 	}
 
 
 
 }
-static void DashboardManager_vidDisplayTemp(void){
+
+static void DashboardManager_vidDisplayDoor(void){
+
+	static u8 Door_state[2] = 0 ;
+	Door_u8GetDoorStatus(DOOR_u8LEFTDOOR , &Door_state[0]);
+	Door_u8GetDoorStatus(DOOR_u8RIGHTDOOR , &Door_state[1]);
+	while(lcd_writeString((const u8*)" D        ") != RT_PENDING);
+	if (Door_state[0] == DOOR_u8OPENED || Door_state[1] == DOOR_u8OPENED  ){
+	while(lcd_writeString((const u8*)"O        ") != RT_PENDING);
+	}
+	else {
+		while(lcd_writeString((const u8*)"C        ") != RT_PENDING);
+	}
 
 
 }
-static void DashboardManager_vidDisplayDoor(void){
+
+static void DashboardManager_vidDisplayTemp(void){
 
 
 }
