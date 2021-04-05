@@ -16,6 +16,7 @@
 #include "../../Hal/TempHal_Driver/Temp_hal.h"
 #include "../Door_Module/door.h"
 #include "../Ignition_Module/ignition.h"
+#include "../Speed_Module/speed.h"
 #include "Sensor_Manager.h"
 
 
@@ -40,36 +41,55 @@ void SensorManager_vidInit(void){
 
 static void SensorManager_vidGetSensorRead(void){
 
+	static u8 count ;
 	keypad_getKey(&KeyPad_Read);
 
 	switch (KeyPad_Read){
 	case SPEED_PLUS_ONE:
-
+		SPEED_u8SetSpeed(SPEED_u8INC_BY_ONE);
 
 		break;
 	case SPEED_MINUS_ONE:
 
-
+		SPEED_u8SetSpeed(SPEED_u8DEC_BY_ONE);
 		break;
 	case IGNITION_ON:
+		count++ ;
+		if (count == 200){
+			count = 0 ;
+			Ignition_u8SetIgntion(IGNITION_u8ON);
+		}
+		//what happend if continously pressed!!
 
 		break;
 	case SPEED_PLUS_TEN:
-
+		SPEED_u8SetSpeed(SPEED_u8INC_BY_TEN);
 		break;
 	case SPEED_MINUS_TEN:
-
+		SPEED_u8SetSpeed(SPEED_u8DEC_BY_TEN);
 		break;
 	case IGNITION_OFF:
-
+			Ignition_u8SetIgntion(IGNITION_u8OFF);
+			count++ ;
+			if (count == 200){
+				count = 0 ;
+				Ignition_u8SetIgntion(IGNITION_u8OFF);
+			}
+			//what happend if continously pressed!!
 		break;
 	case RIGHT_DOOR_OPEN:
-
+		Door_u8SetDoorStatus(DOOR_u8OPENED ,DOOR_u8RIGHTDOOR) ;
 		break;
 	case LEFT_DOOR_OPEN:
-
+		Door_u8SetDoorStatus(DOOR_u8OPENED ,DOOR_u8LEFTDOOR) ;
 		break;
 	case SPEED_BREAK:
+		SPEED_u8SetSpeed(SPEED_u8BREAK);
+		break;
+	default:
+		SPEED_u8SetSpeed(LCD_NO_KEY);
+		Door_u8SetDoorStatus(DOOR_u8CLOSED ,DOOR_u8RIGHTDOOR) ;
+		Door_u8SetDoorStatus(DOOR_u8CLOSED ,DOOR_u8LEFTDOOR) ;
 
 		break;
 	}
@@ -80,5 +100,6 @@ static void SensorManager_vidGetSensorRead(void){
 static void SensorManager_vidGetTempRead(void){
 
 	Temp_hal_u8GetEngineTemp(&Temp_Read);
+
 
 }

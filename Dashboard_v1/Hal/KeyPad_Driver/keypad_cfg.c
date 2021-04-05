@@ -14,21 +14,21 @@
 
 const u8 keypadkeysCfg[4][4] = {
 		[ROW_1] = {
-				[COL_1] = '1',
-				[COL_2] = '2',
-				[COL_3] = '3',
+				[COL_1] = SPEED_PLUS_ONE,
+				[COL_2] = SPEED_MINUS_ONE,
+				[COL_3] = IGNITION_ON,
 				[COL_4] = 'A'
 		},
 		[ROW_2] = {
-				[COL_1] = '4',
-				[COL_2] = '5',
-				[COL_3] = '6',
+				[COL_1] = SPEED_PLUS_TEN,
+				[COL_2] = SPEED_MINUS_TEN,
+				[COL_3] = IGNITION_OFF,
 				[COL_4] = 'B'
 		},
 		[ROW_3] = {
-				[COL_1] = '7',
-				[COL_2] = '8',
-				[COL_3] = '9',
+				[COL_1] = RIGHT_DOOR_OPEN,
+				[COL_2] = LEFT_DOOR_OPEN,
+				[COL_3] = SPEED_BREAK,
 				[COL_4] = 'C'
 		},
 		[ROW_4] = {

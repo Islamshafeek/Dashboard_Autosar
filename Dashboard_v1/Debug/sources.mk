@@ -23,8 +23,10 @@ App/DashboardManager_Module \
 App/Door_Module \
 App/Ignition_Module \
 App/SensorManager_Module \
+App/Speed_Module \
 Hal/KeyPad_Driver \
 Hal/Lcd_Driver \
+Hal/Led_Module \
 Hal/TempHal_Driver \
 Mcal/Dio_Driver \
 Mcal/Port_Driver \

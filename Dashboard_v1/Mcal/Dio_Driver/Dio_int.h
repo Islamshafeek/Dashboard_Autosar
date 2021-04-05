@@ -124,6 +124,6 @@ u8 Dio_u8GetPinVal(u8 Copy_u8SwPinId);
  *					-Not applicable
  * **************************************************************************************
  */
-void Dio_u8TogglePin(u8 Copy_u8SwPinId);
+void Dio_vidTogglePin(u8 Copy_u8SwPinId);
 
 #endif /* DIO_INT_H_ */

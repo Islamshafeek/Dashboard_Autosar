@@ -12,6 +12,7 @@ App/SensorManager_Module/Sensor_Manager.o \
   ../App/SensorManager_Module/../../Hal/TempHal_Driver/Temp_hal.h \
   ../App/SensorManager_Module/../Door_Module/door.h \
   ../App/SensorManager_Module/../Ignition_Module/ignition.h \
+  ../App/SensorManager_Module/../Speed_Module/speed.h \
   ../App/SensorManager_Module/Sensor_Manager.h
 
 ../App/SensorManager_Module/../../Lib/Std_Types.h:
@@ -35,5 +36,7 @@ App/SensorManager_Module/Sensor_Manager.o \
 ../App/SensorManager_Module/../Door_Module/door.h:
 
 ../App/SensorManager_Module/../Ignition_Module/ignition.h:
+
+../App/SensorManager_Module/../Speed_Module/speed.h:
 
 ../App/SensorManager_Module/Sensor_Manager.h:

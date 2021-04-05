@@ -126,7 +126,7 @@ u8 Dio_u8GetPinVal(u8 Copy_u8SwPinId)
 	return Loc_u8returnVal;
 }
 
-void Dio_u8TogglePin(u8 Copy_u8SwPinId)
+void Dio_vidTogglePin(u8 Copy_u8SwPinId)
 {
 	u8 Loc_u8PortId; //Local u8 Port Id
 	u8 Loc_u8PinId;	//Local u8 Pin Id
