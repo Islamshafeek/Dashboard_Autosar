@@ -17,6 +17,7 @@ RM := rm -rf
 -include Hal/Led_Module/subdir.mk
 -include Hal/Lcd_Driver/subdir.mk
 -include Hal/KeyPad_Driver/subdir.mk
+-include App/Temp_Module/subdir.mk
 -include App/Speed_Module/subdir.mk
 -include App/SensorManager_Module/subdir.mk
 -include App/Ignition_Module/subdir.mk

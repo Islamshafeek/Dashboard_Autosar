@@ -10,11 +10,12 @@ App/DashboardManager_Module/Dashboard_Manager.o \
   ../App/DashboardManager_Module/../../Hal/Lcd_Driver/lcd.h \
   ../App/DashboardManager_Module/../../Hal/KeyPad_Driver/keypad.h \
   ../App/DashboardManager_Module/../../Hal/Led_Module/Led_int.h \
-  ../App/DashboardManager_Module/../../Hal/TempHal_Driver/Temp_Hal.h \
+  ../App/DashboardManager_Module/../../Hal/TempHal_Driver/TempHal.h \
   ../App/DashboardManager_Module/../../Mcal/Port_Driver/Port_int.h \
   ../App/DashboardManager_Module/../Door_Module/door.h \
   ../App/DashboardManager_Module/../Ignition_Module/ignition.h \
   ../App/DashboardManager_Module/../Speed_Module/speed.h \
+  ../App/DashboardManager_Module/../Temp_Module/temp.h \
   ../App/DashboardManager_Module/../SensorManager_Module/Sensor_Manager.h
 
 ../App/DashboardManager_Module/../../Lib/STD_TYPES.h:
@@ -35,7 +36,7 @@ App/DashboardManager_Module/Dashboard_Manager.o \
 
 ../App/DashboardManager_Module/../../Hal/Led_Module/Led_int.h:
 
-../App/DashboardManager_Module/../../Hal/TempHal_Driver/Temp_Hal.h:
+../App/DashboardManager_Module/../../Hal/TempHal_Driver/TempHal.h:
 
 ../App/DashboardManager_Module/../../Mcal/Port_Driver/Port_int.h:
 
@@ -44,5 +45,7 @@ App/DashboardManager_Module/Dashboard_Manager.o \
 ../App/DashboardManager_Module/../Ignition_Module/ignition.h:
 
 ../App/DashboardManager_Module/../Speed_Module/speed.h:
+
+../App/DashboardManager_Module/../Temp_Module/temp.h:
 
 ../App/DashboardManager_Module/../SensorManager_Module/Sensor_Manager.h:

@@ -326,19 +326,17 @@ status_RT lcd_writeString(const u8* const str)
 	return status;
 }
 
-status_RT Lcd_WriteChar(u8 Copy_u8Packet, lcdState_t Copy_u8Type){
-
+status_RT Lcd_GoTo(RowNo_e RowNo, ColNo_e ColNo)
+{
 	status_RT status = RT_PENDING;
-	u8 i = 0;
-
-	if (Copy_u8Type == LCD_PACKET_COMMAND || Copy_u8Type == LCD_PACKET_DATA )
+	if(RowNo < _RowNo_len_ && ColNo<_ColNo_len_)
 	{
 		if(isReady)
 		{
 			if(lcdState == lcdState_idle)
 			{
-				lcdState = Copy_u8Type;
-				lcdBuffer[i] = Copy_u8Packet;
+				lcdState = lcdState_writeCommand;
+				lcdBuffer[0] = 0x80+(RowNo*0x40)+ColNo;
 			}
 			else
 			{
@@ -352,8 +350,7 @@ status_RT Lcd_WriteChar(u8 Copy_u8Packet, lcdState_t Copy_u8Type){
 	}
 	else
 	{
-		status = RT_ERROR;
+		status = RT_PARAM;
 	}
-
 	return status;
 }

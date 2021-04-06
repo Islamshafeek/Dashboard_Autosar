@@ -1,5 +1,5 @@
-Hal/TempHal_Driver/Temp_hal.o Hal/TempHal_Driver/Temp_hal.o:  \
- ../Hal/TempHal_Driver/Temp_hal.c \
+Hal/TempHal_Driver/TempHal.o Hal/TempHal_Driver/TempHal.o:  \
+ ../Hal/TempHal_Driver/TempHal.c \
   ../Hal/TempHal_Driver/../../Lib/Std_Types.h \
   ../Hal/TempHal_Driver/../../Lib/Bit_Math.h \
   ../Hal/TempHal_Driver/../../Lib/ATmega32_Registers.h \

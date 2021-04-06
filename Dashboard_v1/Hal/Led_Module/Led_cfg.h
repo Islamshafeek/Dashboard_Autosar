@@ -9,9 +9,9 @@
 #define LED_CFG_H_
 
 typedef enum{
-	LED_0_enuPin = DIO_u8PIN_0,
-	LED_1_enuPin = DIO_u8PIN_1,
-	LED_2_enuPin = DIO_u8PIN_2,
+	LED_0_enuPin = DIO_u8PIN_31,
+	LED_1_enuPin = DIO_u8PIN_30,
+	LED_2_enuPin = DIO_u8PIN_29,
 	LED_3_enuPin = DIO_u8PIN_3,
 	LED_4_enuPin = DIO_u8PIN_4,
 	LED_5_enuPin = DIO_u8PIN_5,

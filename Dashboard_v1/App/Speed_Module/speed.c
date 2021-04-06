@@ -12,7 +12,7 @@
 
 #define NULL     (void*)0
 
-static u8 Speed_u8SpeedKm ;
+static u8 Speed_u8SpeedKm = 5;
 
 u8 SPEED_u8SetSpeed(u8 u8Speed_Copy)
 {
@@ -21,7 +21,7 @@ u8 SPEED_u8SetSpeed(u8 u8Speed_Copy)
 	switch(u8Speed_Copy)
 	{
 	case SPEED_u8INC_BY_ONE :
-		if(Speed_u8SpeedKm <=180)
+		if(Speed_u8SpeedKm <= 180)
 		{
 			Speed_u8SpeedKm++ ;
 		}
@@ -33,14 +33,14 @@ u8 SPEED_u8SetSpeed(u8 u8Speed_Copy)
 		}
 		break;
 	case SPEED_u8INC_BY_TEN :
-		if(Speed_u8SpeedKm < 170)
+		if(Speed_u8SpeedKm <= 180)
 		{
 			Speed_u8SpeedKm += 10 ;
 		}
-		else
-		{
-			Speed_u8SpeedKm = 180  ;
-		}
+//		else
+//		{
+//			Speed_u8SpeedKm = 180 ;
+//		}
 		break;
 
 	case SPEED_u8DEC_BY_TEN :

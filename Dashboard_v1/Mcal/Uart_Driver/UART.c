@@ -12,9 +12,15 @@
 #include "../../Lib/Status.h"
 #include "UART_int.h"
 #include "UART_Pcfg.h"
+#include "../../Hal/Led_Module/Led_int.h"
+
+/* this is a global variable that will hold any data coming from the Uart once an interrupt is fired */
+static u8 data;
+
+App_pfNotify Rxcbf;
 
 //Add pf -> AppNotify pointerToFunction;
-App_pfNotify Module_pfNotify;
+
 
 /******************************************************
  * Function name: UART_vidInit
@@ -65,22 +71,37 @@ u8 UART_u8Init(void){
  * Input: void
  * Output: u16 -> data received.
  ******************************************************/
-u8  UART_u8ReceiveData(u8 * Copy_pu8RecData){
+u8  UART_u8GetData(u8 * Copy_pu8RecData){
 #if UART_u8RxMODE == UART_u8POLLING_BASED
 	while(_UCSRA.Bits.Bit7 == 0);//RXE polling check
+	data = _UDR.u8Regdata;
 #endif
 	//you dont need to check by #if if you're interrupt based
-	*Copy_pu8RecData = _UDR.u8RegData;
+	*Copy_pu8RecData = data;
+	data = 0 ;
 	return RT_SUCCESS;
 }
 
-
+u8 UART_vidSetCallBack(App_pfNotify ptrToFunction)
+{
+	u8 status = RT_SUCCESS;
+	if(ptrToFunction)
+	{
+		Rxcbf = ptrToFunction;
+	}
+	else
+	{
+		status = RT_PARAM;
+	}
+	return status;
+}
 
 ISR(USART_RXC_vect){
-	Module_pfNotify();
+	//	Module_pfNotify();
+	data = _UDR.u8RegData;
+	if(Rxcbf)
+	{
+		Rxcbf();
+	}
 }
 
-u8 UART_vidSetCallBack(App_pfNotify pointerToFunction){
-	Module_pfNotify  = pointerToFunction;
-	return RT_SUCCESS;
-}

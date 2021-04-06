@@ -25,6 +25,7 @@ App/Door_Module \
 App/Ignition_Module \
 App/SensorManager_Module \
 App/Speed_Module \
+App/Temp_Module \
 Hal/KeyPad_Driver \
 Hal/Lcd_Driver \
 Hal/Led_Module \

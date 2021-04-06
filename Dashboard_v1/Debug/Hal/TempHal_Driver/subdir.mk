@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Hal/TempHal_Driver/Temp_hal.c 
+../Hal/TempHal_Driver/TempHal.c 
 
 OBJS += \
-./Hal/TempHal_Driver/Temp_hal.o 
+./Hal/TempHal_Driver/TempHal.o 
 
 C_DEPS += \
-./Hal/TempHal_Driver/Temp_hal.d 
+./Hal/TempHal_Driver/TempHal.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

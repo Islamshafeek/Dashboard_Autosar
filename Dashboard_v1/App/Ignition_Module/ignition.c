@@ -39,7 +39,7 @@ u8 Ignition_u8SetIgntion(u8 u8Status_Copy)
 
 	u8 Local_u8ErrState = RT_SUCCESS ;
 
-	if(u8Status_Copy > IGNITION_u8ON)
+	if(u8Status_Copy >= IGNITION_u8ON)
 	{
 		Ignition_u8Status  = u8Status_Copy  ;
 	}
