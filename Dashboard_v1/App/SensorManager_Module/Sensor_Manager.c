@@ -55,7 +55,7 @@ static void SensorManager_vidGetSensorRead(void){
 		break;
 	case IGNITION_ON:
 		count++ ;
-		if (count == 200){
+		if (count == 100){
 			count = 0 ;
 			Ignition_u8SetIgntion(IGNITION_u8ON);
 		}
@@ -71,7 +71,7 @@ static void SensorManager_vidGetSensorRead(void){
 	case IGNITION_OFF:
 			Ignition_u8SetIgntion(IGNITION_u8OFF);
 			count++ ;
-			if (count == 200){
+			if (count == 100){
 				count = 0 ;
 				Ignition_u8SetIgntion(IGNITION_u8OFF);
 			}
