@@ -30,7 +30,7 @@ static u8 Temp_Read ;
 
 void SensorManager_vidInit(void){
 
-	SwTimer_register_cbf(50,SwTimerMode_periodic,SensorManager_vidGetSensorRead);
+	SwTimer_register_cbf(60,SwTimerMode_periodic,SensorManager_vidGetSensorRead);
 
 	SwTimer_register_cbf(500,SwTimerMode_periodic,SensorManager_vidGetTempRead);
 
@@ -90,7 +90,6 @@ static void SensorManager_vidGetSensorRead(void){
 		SPEED_u8SetSpeed(LCD_NO_KEY);
 		Door_u8SetDoorStatus(DOOR_u8CLOSED ,DOOR_u8RIGHTDOOR) ;
 		Door_u8SetDoorStatus(DOOR_u8CLOSED ,DOOR_u8LEFTDOOR) ;
-
 		break;
 	}
 
@@ -99,7 +98,18 @@ static void SensorManager_vidGetSensorRead(void){
 
 static void SensorManager_vidGetTempRead(void){
 
+	static u8 Timeout_counter  ;
+
 	Temp_hal_u8GetEngineTemp(&Temp_Read);
+	if (Temp_Read == 0 ){
+		Timeout_counter++ ;
+	}
+
+	if(Timeout_counter == TEMP_u8TIMEOUT_MS/TEMP_u8PERIODECTY_MS){
+
+
+
+	}
 
 
 }

@@ -46,6 +46,9 @@ endif
 LSS += \
 Dashboard_v1.lss \
 
+FLASH_IMAGE += \
+Dashboard_v1.hex \
+
 SIZEDUMMY += \
 sizedummy \
 
@@ -67,6 +70,12 @@ Dashboard_v1.lss: Dashboard_v1.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
+Dashboard_v1.hex: Dashboard_v1.elf
+	@echo 'Create Flash image (ihex format)'
+	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex Dashboard_v1.elf  "Dashboard_v1.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 sizedummy: Dashboard_v1.elf
 	@echo 'Invoking: Print Size'
 	-avr-size --format=avr --mcu=atmega32 Dashboard_v1.elf
@@ -75,10 +84,10 @@ sizedummy: Dashboard_v1.elf
 
 # Other Targets
 clean:
-	-$(RM) $(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) Dashboard_v1.elf
+	-$(RM) $(FLASH_IMAGE)$(ELFS)$(OBJS)$(ASM_DEPS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(LSS)$(C_DEPS) Dashboard_v1.elf
 	-@echo ' '
 
-secondary-outputs: $(LSS) $(SIZEDUMMY)
+secondary-outputs: $(LSS) $(FLASH_IMAGE) $(SIZEDUMMY)
 
 .PHONY: all clean dependents
 

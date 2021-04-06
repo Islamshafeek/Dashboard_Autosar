@@ -8,9 +8,9 @@
 #include "../Lib/Std_Types.h"
 #include "../Lib/Bit_Math.h"
 #include "../Lib/Status.h"
-#include "SwTimer.h"
 #include "../Mcal/Timer_Driver/Timer_int.h"
 #include "../Mcal/Dio_Driver/Dio_int.h"
+#include "SwTimer.h"
 
 static u32 NextFree;
 static cbfList_t cbfList[CBF_MAX];

@@ -15,7 +15,7 @@
 
 #define NULL		(void *)0
 
-u8 Ignition_u8Status ;
+static u8 Ignition_u8Status = 0 ;
 
 
 u8 Ignition_u8GetIgntion(u8 * pu8_Status)

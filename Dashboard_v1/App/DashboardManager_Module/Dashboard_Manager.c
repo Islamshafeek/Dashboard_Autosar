@@ -15,6 +15,7 @@
 #include "../../Hal/Lcd_Driver/lcd.h"
 #include "../../Hal/KeyPad_Driver/keypad.h"
 #include "../../Hal/Led_Module/Led_int.h"
+#include "../../Hal/TempHal_Driver/Temp_Hal.h"
 #include "../../Mcal/Port_Driver/Port_int.h"
 #include "../Door_Module/door.h"
 #include "../Ignition_Module/ignition.h"
@@ -26,14 +27,14 @@ static void DashboardManager_vidLcdDisplay(void);
 static void DashboardManager_vidDisplaySpeed(void);
 static void DashboardManager_vidDisplayTemp(void);
 static void DashboardManager_vidDisplayDoor(void);
-//static void DashboardManager_vidDisplayIgnition(void);
+
 static void itoa (u8 Copy_u8Value,u8 *Copy_pu8Arr);
 
 static u8 str[10] ;
 
 int main(void)
 {
-	u8 key;
+	//u8 key;
 	_SREG.Bits.Bit7 = 1;
 	Port_vidInit();
 	SwTimer_init();
@@ -135,7 +136,7 @@ int main(void)
 
 static void DashboardManager_vidLcdDisplay(void){
 
-	static u8 IgnitionState = 0 ;
+	static u8 IgnitionState = IGNITION_u8OFF ;
 
 	Ignition_u8GetIgntion(&IgnitionState);
 	if (IgnitionState == IGNITION_u8ON ){
@@ -145,7 +146,7 @@ static void DashboardManager_vidLcdDisplay(void){
 	}
 	else{
 
-		lcd_clear();
+		while(lcd_clear()!=RT_PENDING);
 	}
 
 }
@@ -155,8 +156,8 @@ static void DashboardManager_vidDisplaySpeed(void){
 	SPEED_u8GetSpeed(&Speed);
 	while(lcd_clear()!=RT_PENDING);
 	while(lcd_writeString((const u8*)"S ") != RT_PENDING);
-	itoa (Speed,&str);
-	if (Speed < 100){
+	itoa (Speed,(u8*)&str);
+	if (Speed < 100 && Speed > 10 ){
 		while(lcd_writeString((const u8*)"0") != RT_PENDING);
 	}
 	else if (Speed < 10){
@@ -166,6 +167,11 @@ static void DashboardManager_vidDisplaySpeed(void){
 
 	if (Speed > 150){
 		while(lcd_writeString((const u8*)"H") != RT_PENDING);
+		LED_vidTurnOn(LED_enuID_1);
+	}
+	else {
+		while(lcd_writeString((const u8*)" ") != RT_PENDING);
+		LED_vidTurnOff(LED_enuID_1);
 	}
 
 
@@ -174,15 +180,18 @@ static void DashboardManager_vidDisplaySpeed(void){
 
 static void DashboardManager_vidDisplayDoor(void){
 
-	static u8 Door_state[2] = 0 ;
+	static u8 Door_state[2] ;
 	Door_u8GetDoorStatus(DOOR_u8LEFTDOOR , &Door_state[0]);
 	Door_u8GetDoorStatus(DOOR_u8RIGHTDOOR , &Door_state[1]);
 	while(lcd_writeString((const u8*)" D        ") != RT_PENDING);
 	if (Door_state[0] == DOOR_u8OPENED || Door_state[1] == DOOR_u8OPENED  ){
-	while(lcd_writeString((const u8*)"O        ") != RT_PENDING);
+		while(lcd_writeString((const u8*)"O        ") != RT_PENDING);
+		LED_vidTurnOn(LED_enuID_0);
 	}
 	else {
 		while(lcd_writeString((const u8*)"C        ") != RT_PENDING);
+		LED_vidTurnOff(LED_enuID_0);
+
 	}
 
 
@@ -191,12 +200,11 @@ static void DashboardManager_vidDisplayDoor(void){
 static void DashboardManager_vidDisplayTemp(void){
 
 
+//	static u8 Temp ;
+
 }
-//static void DashboardManager_vidDisplayIgnition(void){
-//
-//
-//
-//}
+
+
 
 /* Public Function: itoa												   *
  * Description: This function is used to change the sw PORT port value

@@ -52,6 +52,7 @@ u8 Temp_hal_u8SetEngineTemp(void){
  * to get the engine temperature*/
 u8 Temp_hal_u8GetEngineTemp (u8 * pu8_EngineTemp){
 	*pu8_EngineTemp = Temp_hal_su8EngineTemp;
+	Temp_hal_su8EngineTemp = 0 ;
 	return RT_SUCCESS;
 }
 
