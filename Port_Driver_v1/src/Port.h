@@ -23,78 +23,124 @@ typedef uint8_t    Port_PinModeType;
 /** is a type for defining
 the direction of a Port Pin.*/
 typedef enum {
-PORT_PIN_IN = 0x00,
-PORT_PIN_OUT,
+	PORT_PIN_IN = 0x00,
+	PORT_PIN_OUT,
 }Port_PinDirectionType;
 
 
 /** Type of the external data structure containing the initialization data for this module. */
 typedef struct {
-
-uint8_t	PinMode ;
-uint8_t	PinDirection;
-uint8_t	PinLevelInitValue;
-
+	uint8_t	PinMode ;
+	uint8_t	PinDirection;
+	uint8_t	PinLevelInitValue;
 }Pin_ConfigType;
+
+
+typedef enum {
+	PORT_PIN_LEVEL_HIGH,
+	PORT_PIN_LEVEL_LOW
+}PortPinLevelValue;
+
+
+typedef enum{
+	PORT_PIN_MODE_ADC,
+	PORT_PIN_MODE_CAN,
+
+	PORT_PIN_MODE_DIO,
+	PORT_PIN_MODE_DIO_GPT,
+	PORT_PIN_MODE_DIO_WDG,
+
+	PORT_PIN_MODE_FLEXRAY,
+	PORT_PIN_MODE_ICU,
+	PORT_PIN_MODE_LIN,
+	PORT_PIN_MODE_MEM,
+	PORT_PIN_MODE_PWM,
+	PORT_PIN_MODE_SPI,
+
+}EcucEnumerationParamDef;
+
+EcucEnumerationParamDef PortPinMode;
+EcucEnumerationParamDef PortPinInitialMode;
 
 
 typedef struct {
 
-Pin_ConfigType Pin[16] ;
+	Pin_ConfigType Pin[16] ;
 
 }Port_ConfigType;
 
 
 
 /************************************************************************************
-* Service Name: xxx
-* Service ID[hex]: xxx
-* Sync/Async: Synchronous
-* Reentrancy: Non reentrant
-* Parameters (in): xxx
-* Parameters (out): xxx
-* Return value: Std_ReturnType (E_OK - E_NOT_OK)
-* Description:xxx
-************************************************************************************/
+ * Service Name: Port_Init
+ * Service ID[hex]: 0x00
+ * Sync/Async: Synchronous
+ * Reentrancy: Non Reentrant
+ * Parameters (in): ConfigPtr ,,,:>> Pointer to configuration set.
+ * Parameters (out): None
+ * Return value: None
+ * Description: Initializes the Port Driver module.
+ ************************************************************************************/
+void Port_Init (const Port_ConfigType* ConfigPtr);
+
+
+
+
+/************************************************************************************
+ * Service Name: Port_SetPinDirection
+ * Service ID[hex]: 0x01
+ * Sync/Async: Synchronous
+ * Reentrancy: Reentrant
+ * Parameters (in):
+ * 					- Pin       ,,,:>> Port Pin ID number
+ * 					- Direction ,,,:>>> Port Pin Direction
+ * Parameters (out): None
+ * Return value: None
+ * Description: Sets the port pin direction
+ ************************************************************************************/
 void Port_SetPinDirection (Port_PinType Pin,Port_PinDirectionType Direction);
 
 
-/************************************************************************************
-* Service Name: xxx
-* Service ID[hex]: xxx
-* Sync/Async: Synchronous
-* Reentrancy: Non reentrant
-* Parameters (in): xxx
-* Parameters (out): xxx
-* Return value: Std_ReturnType (E_OK - E_NOT_OK)
-* Description:xxx
-************************************************************************************/
-void Port_Init (const Port_ConfigType* ConfigPtr);
 
 /************************************************************************************
-* Service Name: xxx
-* Service ID[hex]: xxx
-* Sync/Async: Synchronous
-* Reentrancy: Non reentrant
-* Parameters (in): xxx
-* Parameters (out): xxx
-* Return value: Std_ReturnType (E_OK - E_NOT_OK)
-* Description:xxx
-************************************************************************************/
+ * Service Name: Port_RefreshPortDirection
+ * Service ID[hex]: 0x02
+ * Sync/Async: Synchronous
+ * Reentrancy: Non Reentrant
+ * Parameters (in): None
+ * Parameters (out): None
+ * Return value: None
+ * Description: Refreshes port direction.
+ ************************************************************************************/
+void Port_RefreshPortDirection (void);
 
+
+
+/************************************************************************************
+ * Service Name: Port_GetVersionInfo
+ * Service ID[hex]: 0x03
+ * Sync/Async: Synchronous
+ * Reentrancy: Reentrant
+ * Parameters (in): None
+ * Parameters (out): versioninfo ,,,:>>>Pointer to where to store the version information of this module.
+ * Return value: None
+ * Description: Returns the version information of this module.
+ ************************************************************************************/
 void Port_GetVersionInfo (Std_VersionInfoType* versioninfo);
 
-/************************************************************************************
-* Service Name: xxx
-* Service ID[hex]: xxx
-* Sync/Async: Synchronous
-* Reentrancy: Non reentrant
-* Parameters (in): xxx
-* Parameters (out): xxx
-* Return value: Std_ReturnType (E_OK - E_NOT_OK)
-* Description:xxx
-************************************************************************************/
 
+
+
+/************************************************************************************
+ * Service Name: Port_SetPinMode
+ * Service ID[hex]: 0x04
+ * Sync/Async: Synchronous
+ * Reentrancy: Reentrant
+ * Parameters (in): None
+ * Parameters (out): None
+ * Return value: None
+ * Description: Sets the port pin mode
+ ************************************************************************************/
 void Port_SetPinMode (Port_PinType Pin,Port_PinModeType Mode);
 
 

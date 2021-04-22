@@ -10,8 +10,7 @@
 
 typedef 			Std_VersionInfoType ;
 
-
-#define STD_ON	1
-#define STD_OFF	0
+#define STD_ON	    1
+#define STD_OFF	    0
 
 #endif /* LIB_STD_TYPES_H_ */
