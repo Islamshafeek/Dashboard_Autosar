@@ -115,7 +115,7 @@
 
 
 /**************************************Mapping Between Registers Address and Port Idx******************************************/
-Gpio_t * PortsAdd[PORT_PIN_NUMBER] = {
+Gpio_t * PortsAdd[(PORT_PIN_NUMBER/16)+1] = {
 
 		(Gpio_t*)GPIOA ,
 		(Gpio_t*)GPIOB,
@@ -296,7 +296,7 @@ void Port_Init (const Port_ConfigType* ConfigPtr)
  * Return value: None
  * Description: Sets the port pin direction
  ************************************************************************************/
-void Port_SetPinDirection (Port_PinType Pin,Port_PinDirectionType Direction){
+void Port_SetPinDirection (uint8_t Pin,Port_PinDirectionType Direction){
 
 	asm("CPSID I");  // Include Port_schM.h
 
@@ -337,11 +337,15 @@ void Port_RefreshPortDirection (void){
 
 	asm("CPSID I");
 
+	static uint32_t Local_Reg ;
+
 	for ( uint8_t PortIdx = 0 ; PortIdx < PORT_PIN_NUMBER ; PortIdx++ )
 	{
 
-		PortsAdd[PortIdx/16] -> MODER	&= ~(GPIO_MODE_CLR << (PortIdx%16 << 1))  ;
-		PortsAdd[PortIdx/16] -> MODER	|= (LocalConfigPtr[PortIdx].PinDirection << ((PortIdx%16) << 1)) ;
+		Local_Reg		= PortsAdd[PortIdx/16] -> MODER ;
+		Local_Reg		&= ~(GPIO_MODE_CLR << (PortIdx%16 << 1))  ;
+		Local_Reg		|= (LocalConfigPtr[PortIdx].PinDirection << ((PortIdx%16) << 1)) ;
+		PortsAdd[PortIdx/16] -> MODER = Local_Reg ;
 	}
 
 	asm("CPSIE I");
@@ -391,7 +395,7 @@ void Port_GetVersionInfo (Std_VersionInfoType* versioninfo){
  * Return value: None
  * Description: Sets the port pin mode
  ************************************************************************************/
-void Port_SetPinMode (Port_PinType Pin,PortPinInitialMode Mode){
+void Port_SetPinMode (uint8_t Pin,PortPinInitialMode Mode){
 
 
 	asm("CPSID I");

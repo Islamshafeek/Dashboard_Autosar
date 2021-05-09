@@ -34,94 +34,90 @@ typedef enum{
 }Det_errors;  // -> Det.h   Preffered to be #define
 
 
-/******************************************************Port_Pin Numbers**********************************************/
-typedef enum{
+/******************************************************Port_PinType / Port_Pin Numbers**********************************************/
 
-	PORT_A_PIN_0  = 0x00    ,  //Sympolic name
-	PORT_A_PIN_1    ,
-	PORT_A_PIN_2    ,
-	PORT_A_PIN_3    ,
-	PORT_A_PIN_4    ,
-	PORT_A_PIN_5    ,
-	PORT_A_PIN_6    ,
-	PORT_A_PIN_7    ,
-	PORT_A_PIN_8    ,
-	PORT_A_PIN_9    ,
-	PORT_A_PIN_10   ,
-	PORT_A_PIN_11   ,
-	PORT_A_PIN_12   ,
-	PORT_A_PIN_13   ,
-	PORT_A_PIN_14   ,
-	PORT_A_PIN_15   ,
-	PORT_B_PIN_0    ,
-	PORT_B_PIN_1    ,
-	PORT_B_PIN_2    ,
-	PORT_B_PIN_3    ,
-	PORT_B_PIN_4    ,
-	PORT_B_PIN_5    ,
-	PORT_B_PIN_6    ,
-	PORT_B_PIN_7    ,
-	PORT_B_PIN_8    ,
-	PORT_B_PIN_9    ,
-	PORT_B_PIN_10   ,
-	PORT_B_PIN_11   ,
-	PORT_B_PIN_12   ,
-	PORT_B_PIN_13   ,
-	PORT_B_PIN_14   ,
-	PORT_B_PIN_15   ,
-	PORT_C_PIN_0    ,
-	PORT_C_PIN_1    ,
-	PORT_C_PIN_2    ,
-	PORT_C_PIN_3    ,
-	PORT_C_PIN_4    ,
-	PORT_C_PIN_5    ,
-	PORT_C_PIN_6    ,
-	PORT_C_PIN_7    ,
-	PORT_C_PIN_8    ,
-	PORT_C_PIN_9    ,
-	PORT_C_PIN_10   ,
-	PORT_C_PIN_11   ,
-	PORT_C_PIN_12   ,
-	PORT_C_PIN_13   ,
-	PORT_C_PIN_14   ,
-	PORT_C_PIN_15   ,
-	PORT_D_PIN_0    ,
-	PORT_D_PIN_1    ,
-	PORT_D_PIN_2    ,
-	PORT_D_PIN_3    ,
-	PORT_D_PIN_4    ,
-	PORT_D_PIN_5    ,
-	PORT_D_PIN_6    ,
-	PORT_D_PIN_7    ,
-	PORT_D_PIN_8    ,
-	PORT_D_PIN_9    ,
-	PORT_D_PIN_10   ,
-	PORT_D_PIN_11   ,
-	PORT_D_PIN_12   ,
-	PORT_D_PIN_13   ,
-	PORT_D_PIN_14   ,
-	PORT_D_PIN_15   ,
-	PORT_E_PIN_0    ,
-	PORT_E_PIN_1    ,
-	PORT_E_PIN_2    ,
-	PORT_E_PIN_3    ,
-	PORT_E_PIN_4    ,
-	PORT_E_PIN_5    ,
-	PORT_E_PIN_6    ,
-	PORT_E_PIN_7    ,
-	PORT_E_PIN_8    ,
-	PORT_E_PIN_9    ,
-	PORT_E_PIN_10   ,
-	PORT_E_PIN_11   ,
-	PORT_E_PIN_12   ,
-	PORT_E_PIN_13   ,
-	PORT_E_PIN_14   ,
-	PORT_E_PIN_15   ,
-	PORT_H_PIN_0    ,
-	PORT_H_PIN_1
-
-}Port_PinType;    	   // For all Ports ?????
-
+#define 	PORT_A_PIN_0          0x00   //Sympolic name
+#define 	PORT_A_PIN_1          0x01
+#define 	PORT_A_PIN_2          0x02
+#define 	PORT_A_PIN_3          0x03
+#define 	PORT_A_PIN_4          0x04
+#define 	PORT_A_PIN_5          0x05
+#define 	PORT_A_PIN_6          0x06
+#define 	PORT_A_PIN_7          0x07
+#define 	PORT_A_PIN_8          0x08
+#define 	PORT_A_PIN_9          0x09
+#define 	PORT_A_PIN_10         0x0A
+#define 	PORT_A_PIN_11         0x0B
+#define 	PORT_A_PIN_12         0x0C
+#define 	PORT_A_PIN_13         0x0D
+#define 	PORT_A_PIN_14         0x0E
+#define 	PORT_A_PIN_15         0x0F
+#define 	PORT_B_PIN_0          0x10
+#define 	PORT_B_PIN_1          0x11
+#define 	PORT_B_PIN_2          0x12
+#define 	PORT_B_PIN_3          0x13
+#define 	PORT_B_PIN_4          0x14
+#define 	PORT_B_PIN_5          0x15
+#define 	PORT_B_PIN_6          0x16
+#define 	PORT_B_PIN_7          0x17
+#define 	PORT_B_PIN_8          0x18
+#define 	PORT_B_PIN_9          0x19
+#define 	PORT_B_PIN_10         0x1A
+#define 	PORT_B_PIN_11         0x1B
+#define 	PORT_B_PIN_12         0x1C
+#define 	PORT_B_PIN_13         0x1D
+#define 	PORT_B_PIN_14         0x1E
+#define 	PORT_B_PIN_15         0x1F
+#define 	PORT_C_PIN_0          0x20
+#define 	PORT_C_PIN_1          0x21
+#define 	PORT_C_PIN_2          0x22
+#define 	PORT_C_PIN_3          0x23
+#define 	PORT_C_PIN_4          0x24
+#define 	PORT_C_PIN_5          0x25
+#define 	PORT_C_PIN_6          0x26
+#define 	PORT_C_PIN_7          0x27
+#define 	PORT_C_PIN_8          0x28
+#define 	PORT_C_PIN_9          0x29
+#define 	PORT_C_PIN_10         0x2A
+#define 	PORT_C_PIN_11         0x2B
+#define 	PORT_C_PIN_12         0x2C
+#define 	PORT_C_PIN_13         0x2D
+#define 	PORT_C_PIN_14         0x2E
+#define 	PORT_C_PIN_15         0x2F
+#define 	PORT_D_PIN_0          0x30
+#define 	PORT_D_PIN_1          0x31
+#define 	PORT_D_PIN_2          0x32
+#define 	PORT_D_PIN_3          0x33
+#define 	PORT_D_PIN_4          0x34
+#define 	PORT_D_PIN_5          0x35
+#define 	PORT_D_PIN_6          0x36
+#define 	PORT_D_PIN_7          0x37
+#define 	PORT_D_PIN_8          0x38
+#define 	PORT_D_PIN_9          0x39
+#define 	PORT_D_PIN_10         0x3A
+#define 	PORT_D_PIN_11         0x3B
+#define 	PORT_D_PIN_12         0x3C
+#define 	PORT_D_PIN_13         0x3D
+#define 	PORT_D_PIN_14         0x3E
+#define 	PORT_D_PIN_15         0x3F
+#define 	PORT_E_PIN_0          0x40
+#define 	PORT_E_PIN_1          0x41
+#define 	PORT_E_PIN_2          0x42
+#define 	PORT_E_PIN_3          0x43
+#define 	PORT_E_PIN_4          0x44
+#define 	PORT_E_PIN_5          0x45
+#define 	PORT_E_PIN_6          0x46
+#define 	PORT_E_PIN_7          0x47
+#define 	PORT_E_PIN_8          0x48
+#define 	PORT_E_PIN_9          0x49
+#define 	PORT_E_PIN_10         0x4A
+#define 	PORT_E_PIN_11         0x4B
+#define 	PORT_E_PIN_12         0x4C
+#define 	PORT_E_PIN_13         0x4D
+#define 	PORT_E_PIN_14         0x4E
+#define 	PORT_E_PIN_15         0x4F
+#define 	PORT_H_PIN_0          0x50
+#define 	PORT_H_PIN_1          0x51
 
 typedef enum{
 
@@ -189,12 +185,12 @@ PORT_PIN_SPEED_V_HIGH
 /** Type of the external data structure containing the initialization data for this module. */
 typedef struct {
 
-	uint8_t	PinMode ;			//AF_Register
-	uint8_t	PinDirection;  		// ModeRegister
+	uint8_t	PinMode ;										//AF_Register
+	uint8_t	PinDirection;  									// ModeRegister
 	uint8_t	PinLevelInitValue;
-	uint8_t PinInternalPullUp ;	// PUPD_Register
-	uint8_t PinSpeed ;			//Speed_Register
-	uint8_t PinOType ;			// Open_Drain - Push Pull
+	uint8_t PinInternalPullUp ;								// PUPD_Register
+	uint8_t PinSpeed ;										//Speed_Register
+	uint8_t PinOType ;										// Open_Drain - Push Pull
 	uint8_t PinDirectionChangeableDuringRuntime;
 	uint8_t PortModeChangeableDuringRuntime;
 
@@ -231,7 +227,7 @@ void Port_Init (const Port_ConfigType* ConfigPtr);
  * Return value: None
  * Description: Sets the port pin direction
  ************************************************************************************/
-void Port_SetPinDirection (Port_PinType Pin,Port_PinDirectionType Direction);
+void Port_SetPinDirection (uint8_t Pin,Port_PinDirectionType Direction);
 
 
 
@@ -263,7 +259,6 @@ void Port_GetVersionInfo (Std_VersionInfoType* versioninfo);
 
 
 
-
 /************************************************************************************
  * Service Name: Port_SetPinMode
  * Service ID[hex]: 0x04
@@ -274,7 +269,7 @@ void Port_GetVersionInfo (Std_VersionInfoType* versioninfo);
  * Return value: None
  * Description: Sets the port pin mode
  ************************************************************************************/
-void Port_SetPinMode (Port_PinType Pin,PortPinInitialMode Mode);
+void Port_SetPinMode (uint8_t Pin,PortPinInitialMode Mode);
 
 
 
