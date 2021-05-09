@@ -18,5 +18,6 @@
 
 #define PORT_SET_PIN_MODE_API						STD_ON
 
+#define PORT_VERSION_INFO_API						STD_ON
 
 #endif /* PORT_CFG_H_ */

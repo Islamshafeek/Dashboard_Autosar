@@ -8,14 +8,24 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "diag/Trace.h"
+#include "stm32f407_Registers.h"
 #include "Std_Types.h"
 #include "Bits.h"
 #include "Bit_Math.h"
 #include "RT_Debug.h"
-#include "stm32f407_Registers.h"
+#include "Port.h"
 #include "Port_Lcfg.h"
 #include "Port_cfg.h"
-#include "Port.h"
+
+
+/*****************************************Version Info********************************************************************/
+
+#define  PORT_VENDOR_ID 						2000
+#define  PORT_MODULE_ID 						100
+#define  PORT_SW_MAJOR_VERSION					10
+#define  PORT_SW_MINOR_VERSION					5
+#define  PORT_INSTANCE_ID       				1
+#define  PORT_SW_PATCH_VERSION 					1
 
 
 /*****************************************Ragisters Addresses*************************************************************/
@@ -116,7 +126,7 @@ Gpio_t * PortsAdd[PORT_PIN_NUMBER] = {
 
 };
 
-
+static const Port_ConfigType* LocalConfigPtr ;
 
 
 /************************************************************************************
@@ -124,120 +134,151 @@ Gpio_t * PortsAdd[PORT_PIN_NUMBER] = {
  * Service ID[hex]: 0x00
  * Sync/Async: Synchronous
  * Reentrancy: Non Reentrant
- * Parameters (in): ConfigPtr ,,,:>> Pointer to configuration set.
+ * Parameters (in): LocalConfigPtr ,,,:>> Pointer to configuration set.
  * Parameters (out): None
  * Return value: None
  * Description: Initializes the Port Driver module.
  ************************************************************************************/
-void Port_Init (const Port_ConfigType* ConfigPtr){
+void Port_Init (const Port_ConfigType* ConfigPtr)
 
-	if (ConfigPtr != NULL ){
+{
+	if (ConfigPtr != NULL )
+	{
 
+		LocalConfigPtr	= ConfigPtr ;
 
 		uint32_t Local_Reg			= 0 ;
 
-		for ( uint8_t PortIdx = 0 ; PortIdx < PORT_PIN_NUMBER ; PortIdx++ ){
+		for ( uint8_t PortIdx = 0 ; PortIdx < PORT_PIN_NUMBER ; PortIdx++ )
+		{
 
-				if ( ConfigPtr[PortIdx].PinDirection  == PORT_PIN_OUT || ConfigPtr[PortIdx].PinDirection  == PORT_PIN_IN ||  ConfigPtr[PortIdx].PinDirection  == PORT_PIN_ANALOG ||  ConfigPtr[PortIdx].PinDirection  == PORT_PIN_AF  ){
+			if ( LocalConfigPtr[PortIdx].PinDirection  == PORT_PIN_OUT
+					|| LocalConfigPtr[PortIdx].PinDirection  == PORT_PIN_IN
+					||  LocalConfigPtr[PortIdx].PinDirection  == PORT_PIN_ANALOG
+					||  LocalConfigPtr[PortIdx].PinDirection  == PORT_PIN_AF  )
+			{
 
-					if(ConfigPtr[PortIdx].PinDirection  == GPIO_MODE_OUTPUT){
+				if(LocalConfigPtr[PortIdx].PinDirection  == GPIO_MODE_OUTPUT)
+				{
 
-						if (ConfigPtr[PortIdx].PinLevelInitValue ==  PORT_PIN_LEVEL_HIGH){
+					if (LocalConfigPtr[PortIdx].PinLevelInitValue ==  PORT_PIN_LEVEL_HIGH)
+					{
 
-							PortsAdd[PortIdx/16] -> BSRR =  1 << PortIdx%16 ;
+						PortsAdd[PortIdx/16] -> BSRR =  1 << PortIdx%16 ;
 
-						}
-						else {
-
-							PortsAdd[PortIdx/16] -> BSRR =  1 << ((PortIdx%16) + 16) ;
-						}
 					}
+					else
+					{
 
-					Local_Reg		= PortsAdd[PortIdx/16] -> MODER ;
-					Local_Reg	 	&= ~(GPIO_MODE_CLR << (PortIdx%16 << 1))  ;
-					Local_Reg	 	|= (ConfigPtr[PortIdx].PinDirection << ((PortIdx%16) << 1)) ;
-					PortsAdd[PortIdx/16] -> MODER =  Local_Reg ;
-				}
-				//					else{
-				//						return RT_PARAM ;
-				//					}
-
-				if (ConfigPtr[PortIdx].PinDirection == PORT_PIN_OUT || ConfigPtr[PortIdx].PinDirection == PORT_PIN_AF){
-					if( ConfigPtr[PortIdx].PinOType == PORT_PIN_OUTPUT_PUSH_PULL || ConfigPtr[PortIdx].PinOType == PORT_PIN_OUTPUT_OPEN_DRAIN){
-
-						PortsAdd[PortIdx/16] ->OTYPER =  ConfigPtr[PortIdx].PinOType;
-						Local_Reg		= PortsAdd[PortIdx/16] ->OTYPER ;
-						Local_Reg	 	&= ~(GPIO_MODE_CLR << PortIdx%16 )  ;
-						Local_Reg	 	|= (ConfigPtr[PortIdx].PinOType << (PortIdx%16) ) ;
-						PortsAdd[PortIdx/16] -> OTYPER =  Local_Reg ;
+						PortsAdd[PortIdx/16] -> BSRR =  1 << ((PortIdx%16) + 16) ;
 					}
-					//						else{
-					//							return RT_PARAM ;
-					//						}
-
-					if ( ConfigPtr[PortIdx].PinSpeed == PORT_PIN_SPEED_LOW
-							||  ConfigPtr[PortIdx].PinSpeed  == PORT_PIN_SPEED_MEDIUM
-							||   ConfigPtr[PortIdx].PinSpeed  == PORT_PIN_SPEED_HIGH
-							||   ConfigPtr[PortIdx].PinSpeed  == PORT_PIN_SPEED_V_HIGH ){
-
-						Local_Reg		= PortsAdd[PortIdx/16] -> OSPEEDR  ;
-						Local_Reg		&= ~(GPIO_OSPEED_CLR << (PortIdx%16 << 1))  ;
-						Local_Reg 		|= (ConfigPtr[PortIdx].PinSpeed << ((PortIdx%16) << 1)) ;
-						PortsAdd[PortIdx/16] -> OSPEEDR = Local_Reg ;
-					}
-					//						else{
-					//							return RT_PARAM ;
-					//						}
 				}
 
-				switch (ConfigPtr[PortIdx].PinDirection){
-				case  PORT_PIN_ANALOG:
+				Local_Reg		= PortsAdd[PortIdx/16] -> MODER ;
+				Local_Reg	 	&= ~(GPIO_MODE_CLR << (PortIdx%16 << 1))  ;
+				Local_Reg	 	|= (LocalConfigPtr[PortIdx].PinDirection << ((PortIdx%16) << 1)) ;
+				PortsAdd[PortIdx/16] -> MODER =  Local_Reg ;
+			}
+			else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+				Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
+			}
+
+			if (LocalConfigPtr[PortIdx].PinDirection == PORT_PIN_OUT || LocalConfigPtr[PortIdx].PinDirection == PORT_PIN_AF)
+			{
+				if( LocalConfigPtr[PortIdx].PinOType == PORT_PIN_OUTPUT_PUSH_PULL || LocalConfigPtr[PortIdx].PinOType == PORT_PIN_OUTPUT_OPEN_DRAIN)
+				{
+
+					PortsAdd[PortIdx/16] ->OTYPER =  LocalConfigPtr[PortIdx].PinOType;
+					Local_Reg		= PortsAdd[PortIdx/16] ->OTYPER ;
+					Local_Reg	 	&= ~(GPIO_MODE_CLR << PortIdx%16 )  ;
+					Local_Reg	 	|= (LocalConfigPtr[PortIdx].PinOType << (PortIdx%16) ) ;
+					PortsAdd[PortIdx/16] -> OTYPER =  Local_Reg ;
+				}
+				else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+					Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
+				}
+			}
+			else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+				Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
+			}
+
+			if ( LocalConfigPtr[PortIdx].PinSpeed == PORT_PIN_SPEED_LOW
+					||  LocalConfigPtr[PortIdx].PinSpeed  == PORT_PIN_SPEED_MEDIUM
+					||   LocalConfigPtr[PortIdx].PinSpeed  == PORT_PIN_SPEED_HIGH
+					||   LocalConfigPtr[PortIdx].PinSpeed  == PORT_PIN_SPEED_V_HIGH )
+			{
+
+				Local_Reg		= PortsAdd[PortIdx/16] -> OSPEEDR  ;
+				Local_Reg		&= ~(GPIO_OSPEED_CLR << (PortIdx%16 << 1))  ;
+				Local_Reg 		|= (LocalConfigPtr[PortIdx].PinSpeed << ((PortIdx%16) << 1)) ;
+				PortsAdd[PortIdx/16] -> OSPEEDR = Local_Reg ;
+			}
+			else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+				Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
+			}
+
+
+			switch (LocalConfigPtr[PortIdx].PinDirection)
+			{
+			case  PORT_PIN_ANALOG:
+				Local_Reg		=  PortsAdd[PortIdx/16] -> PUPDR ;
+				Local_Reg  	 	&= ~(GPIO_PUPD_CLR << (PortIdx%16 << 1))  ;
+				Local_Reg   	|= ( PORT_PIN_INTERNAL_FLOATING << ((PortIdx%16) << 1)) ;
+				PortsAdd[PortIdx/16] -> PUPDR	=  Local_Reg ;
+				break;
+			default :
+				if (LocalConfigPtr[PortIdx].PinInternalPullUp == PORT_PIN_INTERNAL_FLOATING
+						||  LocalConfigPtr[PortIdx].PinInternalPullUp == PORT_PIN_INTERNAL_PULL_UP
+						||  LocalConfigPtr[PortIdx].PinInternalPullUp == PORT_PIN_INTERNAL_PULL_DOWN )
+				{
+
 					Local_Reg		=  PortsAdd[PortIdx/16] -> PUPDR ;
 					Local_Reg  	 	&= ~(GPIO_PUPD_CLR << (PortIdx%16 << 1))  ;
-					Local_Reg   	|= ( PORT_PIN_INTERNAL_FLOATING << ((PortIdx%16) << 1)) ;
+					Local_Reg   	|= ( LocalConfigPtr[PortIdx].PinInternalPullUp << ((PortIdx%16) << 1)) ;
 					PortsAdd[PortIdx/16] -> PUPDR	=  Local_Reg ;
-					break;
-				default :
-					if (ConfigPtr[PortIdx].PinInternalPullUp == PORT_PIN_INTERNAL_FLOATING
-							||  ConfigPtr[PortIdx].PinInternalPullUp == PORT_PIN_INTERNAL_PULL_UP
-							||  ConfigPtr[PortIdx].PinInternalPullUp == PORT_PIN_INTERNAL_PULL_DOWN ){
+				}
+				else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+					Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
+				}
+				break;
+			}
 
-						Local_Reg		=  PortsAdd[PortIdx/16] -> PUPDR ;
-						Local_Reg  	 	&= ~(GPIO_PUPD_CLR << (PortIdx%16 << 1))  ;
-						Local_Reg   	|= ( ConfigPtr[PortIdx].PinInternalPullUp << ((PortIdx%16) << 1)) ;
-						PortsAdd[PortIdx/16] -> PUPDR	=  Local_Reg ;
-					}
-					//						ELSE{
-					//							RETURN RT_PARAM ;
-					//						}
-					break;
+			if (LocalConfigPtr[PortIdx].PinDirection == PORT_PIN_AF)
+			{
+				if (LocalConfigPtr[PortIdx].PinMode <= PORT_AF15)
+				{
+
+					Local_Reg			  = PortsAdd[PortIdx/16] -> AFR[(PortIdx%16) >> 3] ;
+					Local_Reg 			  &= ~(GPIO_AF_CLR << ((PortIdx%16) << 2)) ;
+					Local_Reg			  |= (LocalConfigPtr[PortIdx].PinMode << ((PortIdx%16) << 2)) ;
+					PortsAdd[PortIdx/16] -> AFR[(PortIdx%16) >> 3] = Local_Reg ;
+				}
+				else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+					Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
 				}
 
-//				if (ConfigPtr[PortIdx].PinDirection == PORT_PIN_AF){
-//					if (AF <= GPIO_AF15){
-//
-//						Local_Reg			  = Port -> AFR[PortIdx%16 >> 3] ;
-//						Local_Reg 			  &= ~(GPIO_AF_CLR << (PortIdx%16 << 2)) ;
-//						Local_Reg			  |= (AF << (PortIdx%16 << 2)) ;
-//						Port -> AFR[PortIdx%16 >> 3] = Local_Reg ;
-//					}
-//					//						else{
-//					//							return RT_PARAM ;
-//					//						}
-//				}
 			}
-			//				else
-			//					return RT_PARAM ;
+
 		}
-		//			else
-		//				return RT_PARAM ;
-		//
-		//			return RT_SUCCESS ;
-
 	}
-
-
-
+	else{
+#if PORT_DEV_ERROR_DETECT == STD_ON
+		Det_ReportError(ModuleId,InctanceId,ServiceId:0x00,PORT_E_PARAM_POINTER)
+#endif
+	}
+}
 
 
 
@@ -257,12 +298,30 @@ void Port_Init (const Port_ConfigType* ConfigPtr){
  ************************************************************************************/
 void Port_SetPinDirection (Port_PinType Pin,Port_PinDirectionType Direction){
 
+	asm("CPSID I");  // Include Port_schM.h
 
+	static uint32_t Local_Reg	 ;
 
+	if ( Pin <= PORT_H_PIN_1 && Direction <= PORT_PIN_AF)
+	{
 
+		if ( LocalConfigPtr[Pin].PinDirectionChangeableDuringRuntime == STD_ON )
+		{
 
+			Local_Reg		= PortsAdd[Pin/16] -> MODER ;
+			Local_Reg	 	&= ~(GPIO_MODE_CLR << (Pin%16 << 1))  ;  // -> Macro Set Bit Clr Bit
+			Local_Reg	 	|= (Direction << ((Pin%16) << 1)) ;
+			PortsAdd[Pin/16] -> MODER =  Local_Reg ;
+
+		}
+		//			else
+		//				return PORT_E_DIRECTION_UNCHANGEABLE ;
+	}
+	asm("CPSIE I");
 }
 #endif
+
+
 
 /************************************************************************************
  * Service Name: Port_RefreshPortDirection
@@ -276,14 +335,22 @@ void Port_SetPinDirection (Port_PinType Pin,Port_PinDirectionType Direction){
  ************************************************************************************/
 void Port_RefreshPortDirection (void){
 
+	asm("CPSID I");
 
+	for ( uint8_t PortIdx = 0 ; PortIdx < PORT_PIN_NUMBER ; PortIdx++ )
+	{
 
+		PortsAdd[PortIdx/16] -> MODER	&= ~(GPIO_MODE_CLR << (PortIdx%16 << 1))  ;
+		PortsAdd[PortIdx/16] -> MODER	|= (LocalConfigPtr[PortIdx].PinDirection << ((PortIdx%16) << 1)) ;
+	}
 
+	asm("CPSIE I");
 
 }
 
 
 
+#if PORT_VERSION_INFO_API   == STD_ON
 /************************************************************************************
  * Service Name: Port_GetVersionInfo
  * Service ID[hex]: 0x03
@@ -297,12 +364,20 @@ void Port_RefreshPortDirection (void){
 void Port_GetVersionInfo (Std_VersionInfoType* versioninfo){
 
 
+	if (versioninfo != NULL)
+	{
 
+		versioninfo -> vendorID 		 = PORT_VENDOR_ID 		    ;
+		versioninfo -> moduleID 		 = PORT_MODULE_ID 		    ;
+		versioninfo -> sw_major_version  = PORT_SW_MAJOR_VERSION	;
+		versioninfo -> sw_minor_version  = PORT_SW_MINOR_VERSION	;
+		versioninfo -> instanceID        = PORT_INSTANCE_ID         ;
+		versioninfo -> sw_patch_version  = PORT_SW_PATCH_VERSION    ;
 
-
+	}
 
 }
-
+#endif
 
 
 #if PORT_SET_PIN_MODE_API == STD_ON
@@ -316,12 +391,28 @@ void Port_GetVersionInfo (Std_VersionInfoType* versioninfo){
  * Return value: None
  * Description: Sets the port pin mode
  ************************************************************************************/
-void Port_SetPinMode (Port_PinType Pin,Port_PinModeType Mode){
+void Port_SetPinMode (Port_PinType Pin,PortPinInitialMode Mode){
 
 
+	asm("CPSID I");
+
+	static uint32_t Local_Reg	 ;
+
+	if ( Pin <= PORT_H_PIN_1 && Mode <= PORT_AF15)
+	{
+
+		if ( LocalConfigPtr[Pin].PortModeChangeableDuringRuntime == STD_ON )
+		{
+
+			Local_Reg			  = PortsAdd[Pin/16] -> AFR[Pin%16 >> 3] ;
+			Local_Reg 			  &= ~(GPIO_AF_CLR << (Pin%16 << 2)) ;
+			Local_Reg			  |= (Mode << (Pin%16 << 2)) ;
+			PortsAdd[Pin/16] -> AFR[Pin%16 >> 3] = Local_Reg ;
+		}
+	}
 
 
-
+	asm("CPSIE I");
 
 }
 #endif

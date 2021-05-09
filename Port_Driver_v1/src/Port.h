@@ -12,15 +12,29 @@
 /**Shall cover all available port pins. The type should be chosen
 for the specific MCU platform (best performance)
 shall be used for the symbolic name of a Port Pin.*/
-typedef uint8_t    Port_PinType;
+//typedef uint8_t    Port_PinType;
 
 /** As several port pin modes shall be configurable on one pin,
 the range shall be determined by the implementation.
  Different port pin modes */
-typedef uint8_t    Port_PinModeType;
+//typedef uint8_t    Port_PinModeType;
 
 
+/***************************************Det Errors Type***********************************************/
+typedef enum{
 
+	PORT_E_PARAM_PIN			   = 0x0A	,
+	PORT_E_DIRECTION_UNCHANGEABLE   ,
+	PORT_E_INIT_FAILED              ,
+	PORT_E_PARAM_INVALID_MODE       ,
+	PORT_E_MODE_UNCHANGEABLE        ,
+	PORT_E_UNINIT                   ,
+	PORT_E_PARAM_POINTER
+
+}Det_errors;  // -> Det.h   Preffered to be #define
+
+
+/******************************************************Port_Pin Numbers**********************************************/
 typedef enum{
 
 	PORT_A_PIN_0  = 0x00    ,  //Sympolic name
@@ -106,22 +120,27 @@ typedef enum{
 	PORT_H_PIN_0    ,
 	PORT_H_PIN_1
 
-}Port_PinType_t;    	   // For all Ports ?????
+}Port_PinType;    	   // For all Ports ?????
 
 
 typedef enum{
 
-	PORT_PIN_MODE_ADC,
-	PORT_PIN_MODE_CAN,
-	PORT_PIN_MODE_DIO,
-	PORT_PIN_MODE_DIO_GPT,
-	PORT_PIN_MODE_DIO_WDG,
-	PORT_PIN_MODE_FLEXRAY,
-	PORT_PIN_MODE_ICU,
-	PORT_PIN_MODE_LIN,
-	PORT_PIN_MODE_MEM,
-	PORT_PIN_MODE_PWM,
-	PORT_PIN_MODE_SPI,
+	PORT_AF0 ,		// AF0:  (system)
+	PORT_AF1 ,		// AF1:  (TIM1/TIM2)
+	PORT_AF2 ,		// AF2:  (TIM3..5)
+	PORT_AF3 ,		// AF3:  (TIM8..11)
+	PORT_AF4 ,		// AF4:  (I2C1..3)
+	PORT_AF5 ,		// AF5:  (SPI1/SPI2)
+	PORT_AF6 ,		// AF6:  (SPI3)
+	PORT_AF7 ,		// AF7:  (USART1..3)
+	PORT_AF8 ,		// AF8:  (USART4..6)
+	PORT_AF9 ,		// AF9:  (CAN1/CAN2, TIM12..14)
+	PORT_AF10 ,		// AF10: (OTG_FS, OTG_HS)
+	PORT_AF11 ,		// AF11: (ETH)
+	PORT_AF12 ,		// AF12: (FSMC, SDIO, OTG_HS(1))
+	PORT_AF13 ,		// AF13: (DCMI)
+	PORT_AF14 ,
+	PORT_AF15		// AF15: (EVENTOUT)
 
 }PortPinInitialMode;
 
@@ -181,21 +200,7 @@ typedef struct {
 
 }Port_ConfigType;
 
-typedef struct {
-	uint32_t Gpio_Mode 		;
-	uint32_t Gpio_OType 	;
-	uint32_t Gpio_OSpeed 	;
-	uint32_t Gpio_PUPD 		;
-	uint32_t Gpio_AF 		;
-	void * Gpio_Port 		;
-	uint32_t Gpio_PinNum 	;
-}Pincfg_t;
 
-//typedef struct {
-//
-//	Pin_ConfigType Pin[16] ;
-//
-//}Port_ConfigType;
 
 
 
@@ -269,7 +274,7 @@ void Port_GetVersionInfo (Std_VersionInfoType* versioninfo);
  * Return value: None
  * Description: Sets the port pin mode
  ************************************************************************************/
-void Port_SetPinMode (Port_PinType Pin,Port_PinModeType Mode);
+void Port_SetPinMode (Port_PinType Pin,PortPinInitialMode Mode);
 
 
 

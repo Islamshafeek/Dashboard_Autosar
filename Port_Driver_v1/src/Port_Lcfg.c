@@ -27,7 +27,7 @@
 const Port_ConfigType Port_Config[PORT_PIN_NUMBER] = {
 
 	[PORT_A_PIN_0] =
-				{.PinMode = PORT_PIN_MODE_DIO ,
+				{.PinMode = PORT_AF0 ,
 						.PinDirection = PORT_PIN_OUT , //PORT_PIN_OUT
 						.PinLevelInitValue = PORT_PIN_LEVEL_HIGH ,
 						.PinInternalPullUp = PORT_PIN_INTERNAL_PULL_UP,
@@ -38,7 +38,7 @@ const Port_ConfigType Port_Config[PORT_PIN_NUMBER] = {
 				},
 
 	[PORT_A_PIN_1] =
-				{.PinMode = PORT_PIN_MODE_DIO ,
+				{.PinMode = PORT_AF0 ,
 						.PinDirection = PORT_PIN_OUT ,
 						.PinLevelInitValue = PORT_PIN_LEVEL_LOW ,
 						.PinInternalPullUp = PORT_PIN_INTERNAL_PULL_DOWN ,
@@ -49,7 +49,7 @@ const Port_ConfigType Port_Config[PORT_PIN_NUMBER] = {
 				},
 
 	[PORT_A_PIN_2] =
-				{.PinMode = PORT_PIN_MODE_DIO ,
+				{.PinMode = PORT_AF0 ,
 						.PinDirection = PORT_PIN_OUT ,
 						.PinLevelInitValue = PORT_PIN_LEVEL_HIGH ,
 						.PinInternalPullUp = PORT_PIN_INTERNAL_PULL_UP ,
@@ -60,7 +60,7 @@ const Port_ConfigType Port_Config[PORT_PIN_NUMBER] = {
 
 				},
 	[PORT_A_PIN_3] =
-				{.PinMode = PORT_PIN_MODE_DIO ,
+				{.PinMode = PORT_AF0 ,
 						.PinDirection = PORT_PIN_OUT ,
 						.PinLevelInitValue = PORT_PIN_LEVEL_LOW ,
 						.PinInternalPullUp = PORT_PIN_INTERNAL_PULL_DOWN,

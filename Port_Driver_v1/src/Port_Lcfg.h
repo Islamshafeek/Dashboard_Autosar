@@ -8,7 +8,7 @@
 #ifndef PORT_LCFG_H_
 #define PORT_LCFG_H_
 
-#define 	PORT_PIN_NUMBER			         ( (uint8_t) 96  )
+#define 	PORT_PIN_NUMBER			         ( (uint8_t) 4 )
 #define 	PIN_NUMBER					 ( (uint8_t) 16 )
 #define     PORT_NUMBER_OF_PORT_PINS     ( (uint8_t) 16 )
 #define 	PORT_A				         ( (uint8_t) 0  )
@@ -23,6 +23,8 @@
 #define  PIN_DIRECTION_CHANGEABLE_DURING_RUNTIME 		STD_ON
 
 #define  PIN_MODE_CHANGEABLE_DURING_RUNTIME 			STD_ON
+
+extern const Port_ConfigType Port_Config[PORT_PIN_NUMBER] ;
 
 
 #endif /* PORT_LCFG_H_ */
